@@ -70,7 +70,6 @@ fun TelaInicial2() {
             Image(
                 painter = painterResource(R.drawable.logo2),
                 contentDescription = "",
-                modifier = Modifier
             )
             Card(
                 modifier = Modifier
@@ -96,6 +95,9 @@ fun TelaInicial2() {
                     .padding(top = 210.dp)
                     .size(350.dp)
             )
+
+            Spacer(modifier = Modifier.height(40.dp))
+
             Button(
                 onClick = {},
                 colors = ButtonDefaults.buttonColors(
@@ -107,11 +109,11 @@ fun TelaInicial2() {
                 modifier = Modifier
                     .width(140.dp)
                     .height(43.dp)
-                    .shadow(
-                        elevation = 7.dp, // Altura da sombra
-                        shape = RoundedCornerShape(10.dp), // Formato da sombra
-                        clip = false, // Mantenha a sombra visível
-                    )
+//                    .shadow(
+//                        elevation = 7.dp, // Altura da sombra
+//                        shape = RoundedCornerShape(10.dp), // Formato da sombra
+//                        clip = false, // Mantenha a sombra visível
+//                    )
             ) {
                 Text(
                     text = "LOGIN",
@@ -120,6 +122,7 @@ fun TelaInicial2() {
                     fontSize = 15.sp
                 )
             }
+
             Spacer(modifier = Modifier.height(41.dp))
 
             Button(
@@ -133,6 +136,10 @@ fun TelaInicial2() {
                 modifier = Modifier
                     .width(140.dp)
                     .height(43.dp)
+//                    .shadow(
+//                        elevation = 8.dp, // Altura da sombra
+//                        shape = RoundedCornerShape(10.dp), // Formato da sombra
+//                    )
             ) {
                 Text(
                     text = "CADASTRAR",

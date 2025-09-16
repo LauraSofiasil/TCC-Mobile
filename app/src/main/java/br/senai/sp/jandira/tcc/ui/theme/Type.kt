@@ -14,6 +14,7 @@ val interFamily = FontFamily(
     Font(R.font.inter_italic)
 )
 
+
 //Conjunto de estilos de tipografia
 val Typography = Typography(
     bodyLarge = TextStyle(
