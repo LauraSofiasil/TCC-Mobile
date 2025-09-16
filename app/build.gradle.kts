@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "br.senai.sp.jandira.tcc"
-        minSdk = 30
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -34,6 +34,11 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.15" // use a versão estável do Compose Compiler
+    }
+
     buildFeatures {
         compose = true
     }

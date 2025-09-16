@@ -2,11 +2,19 @@ package br.senai.sp.jandira.tcc.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import br.senai.sp.jandira.tcc.R
 
-// Set of Material typography styles to start with
+val interFamily = FontFamily(
+    Font(R.font.inter_normal, FontWeight.Normal),
+    Font(R.font.inter_bold, FontWeight.Bold),
+    Font(R.font.inter_italic)
+)
+
+//Conjunto de estilos de tipografia
 val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = FontFamily.Default,
@@ -14,12 +22,25 @@ val Typography = Typography(
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
+    ),
     titleLarge = TextStyle(
+        fontFamily = interFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 22.sp,
+        lineHeight = 28.sp,
+        letterSpacing = 0.sp
+    ),
+    titleMedium = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 22.sp,
+        lineHeight = 28.sp,
+        letterSpacing = 0.sp
+    ),
+    titleSmall = TextStyle(
+        fontFamily = interFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
         lineHeight = 28.sp,
         letterSpacing = 0.sp
     ),
@@ -30,5 +51,4 @@ val Typography = Typography(
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp
     )
-    */
 )
