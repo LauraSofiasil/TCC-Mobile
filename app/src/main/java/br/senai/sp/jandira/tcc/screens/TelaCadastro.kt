@@ -1,5 +1,7 @@
 package br.senai.sp.jandira.tcc.screens
 
+import android.util.Log
+import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -18,14 +20,20 @@ import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,9 +47,42 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
+import br.senai.sp.jandira.tcc.model.Usuario
+import br.senai.sp.jandira.tcc.service.Conexao
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.await
 
 @Composable
 fun TelaCadastro(navegacao: NavHostController?) {
+
+    var nomeUsuario by remember { mutableStateOf("Digite seu nome completo...") }
+    var telefone by remember { mutableStateOf("Digite seu telefone...") }
+    var tutelado by remember { mutableStateOf("Digite o nome completo...") }
+    var email by remember { mutableStateOf("Digite seu email...") }
+    var senha by remember { mutableStateOf("Digite sua senha...") }
+    var confirmar by remember { mutableStateOf("Digite sua senha...") }
+
+    var isNomeError by remember { mutableStateOf(false) }
+    var isEmailError by remember { mutableStateOf(false) }
+
+    //Variável determina se a menssagem deve aparecer
+    var mostrarMenssagemSucesso by remember { mutableStateOf(false) }
+
+    fun validar(): Boolean{
+        isNomeError = nomeUsuario.length < 3
+        isEmailError = !Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return !isNomeError && !isEmailError
+    }
+
+    //Criar uma estância da conexão com a API
+    val usuarioAPI = Conexao().getUsuarioService()
+
+    //Inicio da TELA
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -108,6 +149,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                     .background(Color.Transparent),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+//Nome
                 Column() {
                     Text(
                         text = "Nome",
@@ -122,8 +164,8 @@ fun TelaCadastro(navegacao: NavHostController?) {
                     Spacer(modifier = Modifier.height(5.dp))
 
                     TextField(
-                        value = "Digite seu nome completo...",
-                        onValueChange = {},
+                        value = nomeUsuario,
+                        onValueChange = {nomeUsuario = it},
                         colors = TextFieldDefaults.colors(
                             focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                             unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -154,7 +196,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                 }
 
                 Spacer(modifier = Modifier.height(14.dp))
-
+//Telefone
                 Column() {
                     Text(
                         text = "Telefone",
@@ -169,8 +211,8 @@ fun TelaCadastro(navegacao: NavHostController?) {
                     Spacer(modifier = Modifier.height(5.dp))
 
                     TextField(
-                        value = "Digite seu telefone...",
-                        onValueChange = {},
+                        value = telefone,
+                        onValueChange = {telefone = it},
                         colors = TextFieldDefaults.colors(
                             focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                             unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -201,7 +243,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                 }
 
                 Spacer(modifier = Modifier.height(14.dp))
-
+//Tutelado
                 Column() {
                     Text(
                         text = "Nome do tutelado",
@@ -216,8 +258,8 @@ fun TelaCadastro(navegacao: NavHostController?) {
                     Spacer(modifier = Modifier.height(5.dp))
 
                     TextField(
-                        value = "Digite o nome completo...",
-                        onValueChange = {},
+                        value = tutelado,
+                        onValueChange = {tutelado = it},
                         colors = TextFieldDefaults.colors(
                             focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                             unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -248,7 +290,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                 }
 
                 Spacer(modifier = Modifier.height(14.dp))
-
+//Email
                 Column() {
                     Text(
                         text = "Email",
@@ -263,8 +305,8 @@ fun TelaCadastro(navegacao: NavHostController?) {
                     Spacer(modifier = Modifier.height(5.dp))
 
                     TextField(
-                        value = "Digite seu email...",
-                        onValueChange = {},
+                        value = email,
+                        onValueChange = {email = it},
                         colors = TextFieldDefaults.colors(
                             focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                             unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -295,7 +337,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                 }
 
                 Spacer(modifier = Modifier.height(14.dp))
-
+//Senha
                 Column() {
                     Text(
                         text = "Senha",
@@ -310,8 +352,8 @@ fun TelaCadastro(navegacao: NavHostController?) {
                     Spacer(modifier = Modifier.height(5.dp))
 
                     TextField(
-                        value = "Digite sua senha...",
-                        onValueChange = {},
+                        value = senha,
+                        onValueChange = {senha = it},
                         colors = TextFieldDefaults.colors(
                             focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                             unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -342,7 +384,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                 }
 
                 Spacer(modifier = Modifier.height(14.dp))
-
+//Confirmar
                 Column() {
                     Text(
                         text = "Confirmar Senha",
@@ -357,8 +399,8 @@ fun TelaCadastro(navegacao: NavHostController?) {
                     Spacer(modifier = Modifier.height(5.dp))
 
                     TextField(
-                        value = "Digite sua senha...",
-                        onValueChange = {},
+                        value = confirmar,
+                        onValueChange = {confirmar = it},
                         colors = TextFieldDefaults.colors(
                             focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                             unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -389,7 +431,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                 }
             }
 
-            //Botão
+//Botão
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -398,7 +440,27 @@ fun TelaCadastro(navegacao: NavHostController?) {
                 horizontalAlignment = Alignment.End
             ) {
                 Button(
-                    onClick = {},
+                    onClick = {
+                        if(validar()){
+                            val usuario = Usuario(
+                                id = null,
+                                nome = nomeUsuario,
+                                telefone = telefone,
+                                tutelado = tutelado,
+                                email = email,
+                                senha = senha
+                            )
+                            GlobalScope.launch(Dispatchers.IO) {
+                                val usuarioNovo = usuarioAPI
+                                    .cadastrarUsuario(usuario)
+                                    .await()
+
+                                mostrarMenssagemSucesso = true
+                            }
+                        }else{
+                            println("*********Dados incorretos!")
+                        }
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xffffffff)
                     ),
@@ -420,11 +482,62 @@ fun TelaCadastro(navegacao: NavHostController?) {
                 }
             }
         }
+        if (mostrarMenssagemSucesso){
+            AlertDialog(
+                onDismissRequest = {
+                    mostrarMenssagemSucesso = false
+                    nomeUsuario = ""
+                    email = ""
+                },
+                title = {
+                    Text(text = "Sucesso")
+                },
+                text = {
+                    Text(text = "Usuario $nomeUsuario gravado com sucesso!\nDeseja cadastrar outro cliente?")
+                },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            nomeUsuario = ""
+                            email = ""
+                            mostrarMenssagemSucesso = false
+                        }
+                    ) {
+                        Text(text = "Sim")
+                    }
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = {
+                            navegacao!!.navigate("inicio2")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        }
+                    ) {
+                        Text(text = "Não")
+                    }
+                }
+            )
+        }
     }
 }
 
 @Preview
 @Composable
-private fun telaCadastroPreview() {
+private fun TelaCadastroPreview() {
     TelaCadastro(null)
 }
