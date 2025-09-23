@@ -30,10 +30,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
 
 @Composable
-fun telaInicial() {
+fun TelaInicial(navegacao: NavHostController?) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -74,7 +75,7 @@ fun telaInicial() {
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.Transparent)
-                .padding(top = 500.dp),
+                .padding(top = 530.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
@@ -96,12 +97,14 @@ fun telaInicial() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 770.dp)
+                .padding(top = 800.dp)
                 .background(Color.Transparent),
             horizontalAlignment = Alignment.End
         ) {
             Button(
-                onClick = {},
+                onClick = {
+                    navegacao?.navigate("inicio2")
+                },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xff1892FF)
                 ),
@@ -127,5 +130,5 @@ fun telaInicial() {
 @Preview
 @Composable
 private fun telaInicialPreview() {
-    telaInicial()
+    TelaInicial(null)
 }

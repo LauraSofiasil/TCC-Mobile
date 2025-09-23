@@ -22,18 +22,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.DefaultShadowColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
 
 @Composable
-fun TelaInicial2() {
+fun TelaInicial2(navegacao: NavHostController?) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -62,7 +61,7 @@ fun TelaInicial2() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 60.dp)
+                .padding(top = 70.dp)
                 .background(Color.Transparent),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
@@ -92,14 +91,16 @@ fun TelaInicial2() {
                 painter = painterResource(R.drawable.icon),
                 contentDescription = "",
                 modifier = Modifier
-                    .padding(top = 210.dp)
+                    .padding(top = 260.dp)
                     .size(350.dp)
             )
 
             Spacer(modifier = Modifier.height(40.dp))
 
             Button(
-                onClick = {},
+                onClick = {
+                    navegacao?.navigate("login")
+                },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xff1892FF)
                 ),
@@ -126,7 +127,9 @@ fun TelaInicial2() {
             Spacer(modifier = Modifier.height(41.dp))
 
             Button(
-                onClick = {},
+                onClick = {
+                    navegacao?.navigate("cadastro")
+                },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xff1892FF)
                 ),
@@ -155,5 +158,5 @@ fun TelaInicial2() {
 @Composable
 @Preview
 private fun TelaInicial2Preview() {
-    TelaInicial2()
+    TelaInicial2(null)
 }
