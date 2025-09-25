@@ -60,12 +60,12 @@ import retrofit2.await
 @Composable
 fun TelaCadastro(navegacao: NavHostController?) {
 
-    var nomeUsuario by remember { mutableStateOf("Digite seu nome completo...") }
-    var telefone by remember { mutableStateOf("Digite seu telefone...") }
-    var tutelado by remember { mutableStateOf("Digite o nome completo...") }
-    var email by remember { mutableStateOf("Digite seu email...") }
-    var senha by remember { mutableStateOf("Digite sua senha...") }
-    var confirmar by remember { mutableStateOf("Digite sua senha...") }
+    var nomeUsuario by remember { mutableStateOf("") }
+    var telefone by remember { mutableStateOf("") }
+    var tutelado by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var senha by remember { mutableStateOf("") }
+    var confirmar by remember { mutableStateOf("") }
 
     var isNomeError by remember { mutableStateOf(false) }
     var isEmailError by remember { mutableStateOf(false) }
@@ -140,7 +140,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                 )
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(80.dp))
 
             //Conteúdo
             Column(
@@ -173,8 +173,12 @@ fun TelaCadastro(navegacao: NavHostController?) {
                             focusedContainerColor = Color(0xffffffff), //Cor do fundo - usuário clicou
                             unfocusedContainerColor = Color(0xffffffff), //Cor do fundo - usuário não clicou
                             focusedIndicatorColor = Color.Transparent, //Cor da linha de baixo - usuário clicou
-                            unfocusedIndicatorColor = Color.Transparent //Cor da linha de baixo - usuário não clicou
+                            unfocusedIndicatorColor = Color.Transparent, //Cor da linha de baixo - usuário não clicou
                         ),
+
+                        placeholder = {
+                            Text("Digite seu nome...", color = Color(0xff949494))
+                        },
                         leadingIcon = {
                             Icon(
                                 imageVector = Icons.Default.Person,
@@ -186,7 +190,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                         },
                         modifier = Modifier
                             .width(285.dp)
-                            .height(48.dp),
+                            .height(52.dp),
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Number,
@@ -196,100 +200,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                 }
 
                 Spacer(modifier = Modifier.height(14.dp))
-//Telefone
-                Column() {
-                    Text(
-                        text = "Telefone",
-                        color = Color.White,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.Medium,
-                        modifier = Modifier
-                            .padding(start = 5.dp)
-                    )
 
-                    Spacer(modifier = Modifier.height(5.dp))
-
-                    TextField(
-                        value = telefone,
-                        onValueChange = {telefone = it},
-                        colors = TextFieldDefaults.colors(
-                            focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
-                            unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
-                            cursorColor = Color.Black, //Cor do cursor enquanto digita
-                            focusedContainerColor = Color(0xffffffff), //Cor do fundo - usuário clicou
-                            unfocusedContainerColor = Color(0xffffffff), //Cor do fundo - usuário não clicou
-                            focusedIndicatorColor = Color.Transparent, //Cor da linha de baixo - usuário clicou
-                            unfocusedIndicatorColor = Color.Transparent //Cor da linha de baixo - usuário não clicou
-                        ),
-                        leadingIcon = {
-                            Icon(
-                                imageVector = Icons.Default.Call,
-                                contentDescription = "",
-                                tint = Color(0x52000000),
-                                modifier = Modifier
-                                    .size(20.dp)
-                            )
-                        },
-                        modifier = Modifier
-                            .width(285.dp)
-                            .height(48.dp),
-                        shape = RoundedCornerShape(12.dp),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        )
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(14.dp))
-//Tutelado
-                Column() {
-                    Text(
-                        text = "Nome do tutelado",
-                        color = Color.White,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.Medium,
-                        modifier = Modifier
-                            .padding(start = 5.dp)
-                    )
-
-                    Spacer(modifier = Modifier.height(5.dp))
-
-                    TextField(
-                        value = tutelado,
-                        onValueChange = {tutelado = it},
-                        colors = TextFieldDefaults.colors(
-                            focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
-                            unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
-                            cursorColor = Color.Black, //Cor do cursor enquanto digita
-                            focusedContainerColor = Color(0xffffffff), //Cor do fundo - usuário clicou
-                            unfocusedContainerColor = Color(0xffffffff), //Cor do fundo - usuário não clicou
-                            focusedIndicatorColor = Color.Transparent, //Cor da linha de baixo - usuário clicou
-                            unfocusedIndicatorColor = Color.Transparent //Cor da linha de baixo - usuário não clicou
-                        ),
-                        leadingIcon = {
-                            Icon(
-                                imageVector = Icons.Default.Person,
-                                contentDescription = "",
-                                tint = Color(0x52000000),
-                                modifier = Modifier
-                                    .size(20.dp)
-                            )
-                        },
-                        modifier = Modifier
-                            .width(285.dp)
-                            .height(48.dp),
-                        shape = RoundedCornerShape(12.dp),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        )
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(14.dp))
 //Email
                 Column() {
                     Text(
@@ -316,6 +227,9 @@ fun TelaCadastro(navegacao: NavHostController?) {
                             focusedIndicatorColor = Color.Transparent, //Cor da linha de baixo - usuário clicou
                             unfocusedIndicatorColor = Color.Transparent //Cor da linha de baixo - usuário não clicou
                         ),
+                        placeholder = {
+                            Text("Digite seu email...", color = Color(0xff949494))
+                        },
                         leadingIcon = {
                             Icon(
                                 imageVector = Icons.Default.Email,
@@ -327,7 +241,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                         },
                         modifier = Modifier
                             .width(285.dp)
-                            .height(48.dp),
+                            .height(52.dp),
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Number,
@@ -363,6 +277,9 @@ fun TelaCadastro(navegacao: NavHostController?) {
                             focusedIndicatorColor = Color.Transparent, //Cor da linha de baixo - usuário clicou
                             unfocusedIndicatorColor = Color.Transparent //Cor da linha de baixo - usuário não clicou
                         ),
+                        placeholder = {
+                            Text("Digite sua senha...", color = Color(0xff949494))
+                        },
                         leadingIcon = {
                             Icon(
                                 imageVector = Icons.Default.Lock,
@@ -374,7 +291,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                         },
                         modifier = Modifier
                             .width(285.dp)
-                            .height(48.dp),
+                            .height(52.dp),
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Number,
@@ -410,6 +327,9 @@ fun TelaCadastro(navegacao: NavHostController?) {
                             focusedIndicatorColor = Color.Transparent, //Cor da linha de baixo - usuário clicou
                             unfocusedIndicatorColor = Color.Transparent //Cor da linha de baixo - usuário não clicou
                         ),
+                        placeholder = {
+                            Text("Digite sua senha...", color = Color(0xff949494))
+                        },
                         leadingIcon = {
                             Icon(
                                 imageVector = Icons.Default.Lock,
@@ -421,7 +341,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                         },
                         modifier = Modifier
                             .width(285.dp)
-                            .height(48.dp),
+                            .height(53.dp),
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Number,
@@ -435,7 +355,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 20.dp)
+                    .padding(top = 140.dp)
                     .background(Color.Transparent),
                 horizontalAlignment = Alignment.End
             ) {
@@ -445,8 +365,6 @@ fun TelaCadastro(navegacao: NavHostController?) {
                             val usuario = Usuario(
                                 id = null,
                                 nome = nomeUsuario,
-                                telefone = telefone,
-                                tutelado = tutelado,
                                 email = email,
                                 senha = senha
                             )
@@ -510,22 +428,6 @@ fun TelaCadastro(navegacao: NavHostController?) {
                     TextButton(
                         onClick = {
                             navegacao!!.navigate("inicio2")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         }
                     ) {
                         Text(text = "Não")
