@@ -372,7 +372,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                                 val usuarioNovo = usuarioAPI
                                     .cadastrarUsuario(usuario)
                                     .await()
-
+                                println("Sucesso")
                                 mostrarMenssagemSucesso = true
                             }
                         }else{
