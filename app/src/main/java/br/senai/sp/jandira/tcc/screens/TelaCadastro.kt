@@ -61,8 +61,6 @@ import retrofit2.await
 fun TelaCadastro(navegacao: NavHostController?) {
 
     var nomeUsuario by remember { mutableStateOf("") }
-    var telefone by remember { mutableStateOf("") }
-    var tutelado by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var senha by remember { mutableStateOf("") }
     var confirmar by remember { mutableStateOf("") }
@@ -193,7 +191,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                             .height(52.dp),
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Number,
+                            keyboardType = KeyboardType.Text,
                             imeAction = ImeAction.Next
                         )
                     )
@@ -244,7 +242,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                             .height(52.dp),
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Number,
+                            keyboardType = KeyboardType.Email,
                             imeAction = ImeAction.Next
                         )
                     )
@@ -294,7 +292,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                             .height(52.dp),
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Number,
+                            keyboardType = KeyboardType.Password,
                             imeAction = ImeAction.Next
                         )
                     )
@@ -344,7 +342,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                             .height(53.dp),
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Number,
+                            keyboardType = KeyboardType.Password,
                             imeAction = ImeAction.Next
                         )
                     )

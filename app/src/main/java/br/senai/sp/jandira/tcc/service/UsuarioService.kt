@@ -13,8 +13,15 @@ import retrofit2.http.Path
 
 interface UsuarioService {
 
+    //Iserir
     @Headers("Content-Type: application/json")
     @POST("usuario") //diz para o retrofit que a função abaixo é um post
     fun cadastrarUsuario(@Body usuario: Usuario): Call<Usuario>
 
+    @GET("usuario")
+    fun listarUsuarios(): Call<Usuario>
+
+    //Buscar por ID
+    @GET("usuario/{id}")
+    fun buscarporID(@Path("id") id: Long): Call<Usuario>
 }

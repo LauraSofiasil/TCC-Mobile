@@ -24,6 +24,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,6 +44,10 @@ import br.senai.sp.jandira.tcc.R
 
 @Composable
 fun TelaLogin(navegacao: NavHostController?) {
+
+    var email by remember { mutableStateOf("") }
+    var senha by remember { mutableStateOf("") }
+
     Box(
       modifier = Modifier
           .fillMaxSize()
@@ -109,8 +117,8 @@ fun TelaLogin(navegacao: NavHostController?) {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     TextField(
-                        value = "Digite seu email...",
-                        onValueChange = {},
+                        value = email,
+                        onValueChange = {email = it},
                         colors = TextFieldDefaults.colors(
                             focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                             unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
