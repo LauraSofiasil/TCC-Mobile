@@ -16,11 +16,13 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -41,12 +43,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
+import br.senai.sp.jandira.tcc.model.LoginUsuario
+import br.senai.sp.jandira.tcc.service.RetrofitFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.await
 
 @Composable
 fun TelaLogin(navegacao: NavHostController?) {
 
-    var email by remember { mutableStateOf("") }
-    var senha by remember { mutableStateOf("") }
+    var emailUs by remember { mutableStateOf("") }
+    var senhaUs by remember { mutableStateOf("") }
+
+    //Variável determina se a menssagem deve aparecer
+    var mostrarMenssagemSucesso by remember { mutableStateOf(false) }
+
+    val usuarioApi = RetrofitFactory().getUsuarioService()
 
     Box(
       modifier = Modifier
@@ -117,8 +130,8 @@ fun TelaLogin(navegacao: NavHostController?) {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     TextField(
-                        value = email,
-                        onValueChange = {email = it},
+                        value = emailUs,
+                        onValueChange = {emailUs = it},
                         colors = TextFieldDefaults.colors(
                             focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                             unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -128,6 +141,9 @@ fun TelaLogin(navegacao: NavHostController?) {
                             focusedIndicatorColor = Color.Transparent, //Cor da linha de baixo - usuário clicou
                             unfocusedIndicatorColor = Color.Transparent //Cor da linha de baixo - usuário não clicou
                         ),
+                        placeholder = {
+                            Text("Digite seu email...", color = Color(0xff949494))
+                        },
                         leadingIcon = {
                             Icon(
                                 imageVector = Icons.Default.Person,
@@ -163,8 +179,8 @@ fun TelaLogin(navegacao: NavHostController?) {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     TextField(
-                        value = "Digite sua senha...",
-                        onValueChange = {},
+                        value = senhaUs,
+                        onValueChange = {senhaUs = it},
                         colors = TextFieldDefaults.colors(
                             focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                             unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -174,6 +190,9 @@ fun TelaLogin(navegacao: NavHostController?) {
                             focusedIndicatorColor = Color.Transparent, //Cor da linha de baixo - usuário clicou
                             unfocusedIndicatorColor = Color.Transparent //Cor da linha de baixo - usuário não clicou
                         ),
+                        placeholder = {
+                            Text("Digite sua senha...", color = Color(0xff949494))
+                        },
                         leadingIcon = {
                             Icon(
                                 imageVector = Icons.Default.Lock,
@@ -223,7 +242,18 @@ fun TelaLogin(navegacao: NavHostController?) {
                     horizontalAlignment = Alignment.End
                 ) {
                     Button(
-                        onClick = {},
+                        onClick = {
+                            val body = LoginUsuario(
+                                email = emailUs,
+                                senha = senhaUs
+                            )
+                            GlobalScope.launch(Dispatchers.IO){
+                                val usuarioEnter = usuarioApi.loginUsuario(body).await()
+                                mostrarMenssagemSucesso = true
+                                println("Sucesso!!!!")
+                            }
+
+                        },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xffffffff)
                         ),
@@ -245,6 +275,29 @@ fun TelaLogin(navegacao: NavHostController?) {
                     }
                 }
             }
+        }
+        if (mostrarMenssagemSucesso){
+            AlertDialog(
+                onDismissRequest = {
+                    mostrarMenssagemSucesso = false
+                },
+                title = {
+                    Text(text = "TEAjuda")
+                },
+                text = {
+                    Text(text = "Bem vindo!!")
+                },
+                confirmButton = {},
+                dismissButton = {
+                    TextButton(
+                        onClick = {
+                            navegacao!!.navigate("home")
+                        }
+                    ) {
+                        Text(text = "Ok")
+                    }
+                }
+            )
         }
     }
 }

@@ -1,6 +1,5 @@
 package br.senai.sp.jandira.tcc.screens
 
-import android.util.Log
 import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
@@ -48,13 +46,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
 import br.senai.sp.jandira.tcc.model.Usuario
-import br.senai.sp.jandira.tcc.service.Conexao
+import br.senai.sp.jandira.tcc.service.RetrofitFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.await
 
 @Composable
@@ -78,7 +73,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
     }
 
     //Criar uma estância da conexão com a API
-    val usuarioAPI = Conexao().getUsuarioService()
+    val usuarioAPI = RetrofitFactory().getUsuarioService()
 
     //Inicio da TELA
     Box(
