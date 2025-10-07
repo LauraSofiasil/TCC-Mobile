@@ -16,7 +16,7 @@ interface UsuarioService {
 
     //Login
     @Headers("Content-Type: application/json")
-    @POST("usuario") //diz para o retrofit que a função abaixo é um post
+    @POST("usuario/login") //diz para o retrofit que a função abaixo é um post
     fun loginUsuario(@Body loginUsuario: LoginUsuario ): Call<Usuario>
 
 //    @GET("usuario")
