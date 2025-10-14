@@ -48,7 +48,7 @@ import br.senai.sp.jandira.tcc.service.RetrofitFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import retrofit2.await
+
 
 @Composable
 fun TelaLogin(navegacao: NavHostController?) {
@@ -243,15 +243,15 @@ fun TelaLogin(navegacao: NavHostController?) {
                 ) {
                     Button(
                         onClick = {
-                            val body = LoginUsuario(
-                                email = emailUs,
-                                senha = senhaUs
-                            )
-                            GlobalScope.launch(Dispatchers.IO){
-                                val usuarioEnter = usuarioApi.loginUsuario(body).await()
-                                mostrarMenssagemSucesso = true
-                                println("Sucesso!!!!")
-                            }
+//                            val body = LoginUsuario(
+//                                email = emailUs,
+//                                senha = senhaUs
+//                            )
+//                            GlobalScope.launch(Dispatchers.IO){
+//                                val usuarioEnter = usuarioApi.loginUsuario(body).await()
+//                                mostrarMenssagemSucesso = true
+//                                println("Sucesso!!!!")
+                            //}
 
                         },
                         colors = ButtonDefaults.buttonColors(
