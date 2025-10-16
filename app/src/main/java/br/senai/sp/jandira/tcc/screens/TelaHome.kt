@@ -2,6 +2,7 @@ package br.senai.sp.jandira.tcc.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,16 +15,27 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
+import br.senai.sp.jandira.tcc.model.LoginUsuario
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.await
 
 @Composable
 fun TelaHome(navegacao: NavHostController?) {
@@ -35,13 +47,15 @@ fun TelaHome(navegacao: NavHostController?) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(0xffDDE7F0))
+                .background(Color(0xffDDE7F0)),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            //Barra Inferior
+            //Barra Superior
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(38.dp),
+                    .height(45.dp),
                 shape = RoundedCornerShape(
                     bottomStart = 10.dp,
                     bottomEnd = 10.dp
@@ -52,18 +66,55 @@ fun TelaHome(navegacao: NavHostController?) {
             ) {
                 Row(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = 14.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {}
+                        .fillMaxSize(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.sininho),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(29.dp)
+                    )
+
+                    Spacer(modifier = Modifier.width(80.dp))
+
+                    Image(
+                        painter = painterResource(R.drawable.perfilicon),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable { navegacao!!.navigate("perfil") }
+                    )
+                }
             }
 
             Image(
                 painter = painterResource(R.drawable.slidehome),
                 contentDescription = "",
                 modifier = Modifier
-                    .size(150.dp)
+                    .size(500.dp)
             )
+
+            Button(
+                onClick = {},
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xffffffff)
+                ),
+                shape = RoundedCornerShape(
+                    10.dp
+                ),
+                modifier = Modifier
+                    .width(257.dp)
+                    .height(52.dp)
+            ) {
+                Text(
+                    text = "Localidades",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = Color(0xff0D0D0C),
+                    fontSize = 19.sp
+                )
+            }
 
             //Barra inferior
             Card(
@@ -80,8 +131,8 @@ fun TelaHome(navegacao: NavHostController?) {
             ) {
                 Row(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = 14.dp),
+                        .padding(top = 14.dp)
+                        .fillMaxSize(),
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Image(
@@ -98,6 +149,7 @@ fun TelaHome(navegacao: NavHostController?) {
                         contentDescription = "",
                         modifier = Modifier
                             .size(24.dp)
+                            .clickable { navegacao!!.navigate("home") }
                     )
 
                     Spacer(modifier = Modifier.width(80.dp))
@@ -107,6 +159,7 @@ fun TelaHome(navegacao: NavHostController?) {
                         contentDescription = "",
                         modifier = Modifier
                             .size(24.dp)
+                            .clickable { navegacao!!.navigate("perfil") }
                     )
                 }
             }

@@ -170,7 +170,7 @@ fun TelaLogin(navegacao: NavHostController?) {
                             .width(300.dp),
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Number,
+                            keyboardType = KeyboardType.Email,
                             imeAction = ImeAction.Next
                         )
                     )
@@ -219,7 +219,7 @@ fun TelaLogin(navegacao: NavHostController?) {
                             .width(300.dp),
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Number,
+                            keyboardType = KeyboardType.Text,
                             imeAction = ImeAction.Next
                         )
                     )

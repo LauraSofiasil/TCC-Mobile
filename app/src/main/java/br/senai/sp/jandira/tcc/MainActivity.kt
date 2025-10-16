@@ -12,6 +12,7 @@ import br.senai.sp.jandira.tcc.screens.TelaHome
 import br.senai.sp.jandira.tcc.screens.TelaInicial
 import br.senai.sp.jandira.tcc.screens.TelaInicial2
 import br.senai.sp.jandira.tcc.screens.TelaLogin
+import br.senai.sp.jandira.tcc.screens.TelaPerfil
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +29,7 @@ class MainActivity : ComponentActivity() {
                 composable(route = "login"){ TelaLogin(navegacao) }
                 composable(route = "cadastro"){ TelaCadastro(navegacao) }
                 composable(route = "home"){ TelaHome(navegacao) }
+                composable(route = "perfil"){ TelaPerfil(navegacao) }
             }
         }
     }

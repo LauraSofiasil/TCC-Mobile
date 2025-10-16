@@ -2,6 +2,7 @@ package br.senai.sp.jandira.tcc.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,10 +42,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
 
 @Composable
-fun TelaPerfil(modifier: Modifier = Modifier) {
+fun TelaPerfil(navegacao: NavHostController?) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -72,7 +74,8 @@ fun TelaPerfil(modifier: Modifier = Modifier) {
                     .fillMaxWidth()
                     .background(Color.Transparent)
                     .padding(top = 23.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Image(
                     painter = painterResource(R.drawable.perfil),
@@ -81,19 +84,18 @@ fun TelaPerfil(modifier: Modifier = Modifier) {
                         .size(150.dp)
                 )
 
-                Spacer(modifier = Modifier.height(10.dp))
-
                 Text(
                     text = "Perfil",
                     style = MaterialTheme.typography.titleLarge,
                     color = Color.White,
-                    fontSize = 40.sp
+                    fontSize = 40.sp,
+                    modifier = Modifier
+                        .padding(top = 10.dp)
                 )
-
-                Spacer(modifier = Modifier.height(40.dp))
 
                 Card(
                     modifier = Modifier
+                        .padding(top = 40.dp)
                         .width(300.dp)
                         .height(499.dp),
                     shape = RoundedCornerShape(
@@ -106,6 +108,7 @@ fun TelaPerfil(modifier: Modifier = Modifier) {
                         containerColor = Color.White
                     )
                 ) {
+                    //Campos
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
@@ -114,7 +117,7 @@ fun TelaPerfil(modifier: Modifier = Modifier) {
                     ) {
                         Column(
                             modifier = Modifier
-                                .padding(top = 60.dp)
+                                .padding(top = 70.dp)
                                 .fillMaxHeight()
                                 .width(250.dp)
                                 .background(Color.White) //Contém os campos
@@ -266,16 +269,11 @@ fun TelaPerfil(modifier: Modifier = Modifier) {
                             }
                         }
                     }
-
-                    Spacer(modifier = Modifier.height(50.dp))
-
-
                 }
-
-                Spacer(modifier = Modifier.height(20.dp))
 
                 Card(
                     modifier = Modifier
+                        .padding(top = 80.dp)
                         .fillMaxWidth()
                         .height(65.dp),
                     shape = RoundedCornerShape(
@@ -306,6 +304,7 @@ fun TelaPerfil(modifier: Modifier = Modifier) {
                             contentDescription = "",
                             modifier = Modifier
                                 .size(24.dp)
+                                .clickable { navegacao!!.navigate("home") }
                         )
 
                         Spacer(modifier = Modifier.width(80.dp))
@@ -326,5 +325,5 @@ fun TelaPerfil(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun TelaHomePreview() {
-    TelaPerfil()
+    TelaPerfil(null)
 }
