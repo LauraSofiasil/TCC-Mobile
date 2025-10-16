@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.tcc.screens
 
+import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -44,10 +45,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
 import br.senai.sp.jandira.tcc.model.LoginUsuario
+import br.senai.sp.jandira.tcc.model.Usuario
 import br.senai.sp.jandira.tcc.service.RetrofitFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import retrofit2.await
 
 
 @Composable
@@ -56,8 +59,18 @@ fun TelaLogin(navegacao: NavHostController?) {
     var emailUs by remember { mutableStateOf("") }
     var senhaUs by remember { mutableStateOf("") }
 
+    var isEmailError by remember { mutableStateOf(false) }
+    var isSenhaError by remember { mutableStateOf(false) }
+
     //Variável determina se a menssagem deve aparecer
     var mostrarMenssagemSucesso by remember { mutableStateOf(false) }
+
+    //Faz a validação de email e senha
+    fun validar(): Boolean{
+        isEmailError = !Patterns.EMAIL_ADDRESS.matcher(emailUs).matches()
+        isSenhaError = senhaUs.length < 3
+        return !isSenhaError && !isEmailError
+    }
 
     val usuarioApi = RetrofitFactory().getUsuarioService()
 
@@ -243,16 +256,22 @@ fun TelaLogin(navegacao: NavHostController?) {
                 ) {
                     Button(
                         onClick = {
-//                            val body = LoginUsuario(
-//                                email = emailUs,
-//                                senha = senhaUs
-//                            )
-//                            GlobalScope.launch(Dispatchers.IO){
-//                                val usuarioEnter = usuarioApi.loginUsuario(body).await()
-//                                mostrarMenssagemSucesso = true
-//                                println("Sucesso!!!!")
-                            //}
-
+                            if(validar()){
+                                val body = LoginUsuario(
+                                    id = null,
+                                    email = emailUs,
+                                    senha = senhaUs
+                                )
+                                GlobalScope.launch(Dispatchers.IO) {
+                                    val usuario = usuarioApi
+                                        .loginUsuario(body)
+                                        .await()
+                                    println("Sucesso uhuuuull")
+                                    mostrarMenssagemSucesso = true
+                                }
+                            }else{
+                                println("Deu ERRADOOO")
+                            }
                         },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xffffffff)
@@ -280,21 +299,28 @@ fun TelaLogin(navegacao: NavHostController?) {
             AlertDialog(
                 onDismissRequest = {
                     mostrarMenssagemSucesso = false
-                },
-                title = {
-                    Text(text = "TEAjuda")
+                    emailUs = ""
+                    senhaUs = ""
                 },
                 text = {
-                    Text(text = "Bem vindo!!")
+                    Text(text = "Seja bem-vindo $emailUs!!")
                 },
-                confirmButton = {},
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            emailUs = ""
+                            senhaUs = ""
+                            mostrarMenssagemSucesso = false
+                        }
+                    ) {}
+                },
                 dismissButton = {
                     TextButton(
                         onClick = {
                             navegacao!!.navigate("home")
                         }
                     ) {
-                        Text(text = "Ok")
+                        Text(text = "Entrar")
                     }
                 }
             )
