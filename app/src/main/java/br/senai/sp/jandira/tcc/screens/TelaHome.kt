@@ -159,7 +159,7 @@ fun TelaHome(navegacao: NavHostController?) {
                         contentDescription = "",
                         modifier = Modifier
                             .size(24.dp)
-                            .clickable { navegacao!!.navigate("perfil") }
+                            .clickable { navegacao!!.navigate("") }
                     )
                 }
             }

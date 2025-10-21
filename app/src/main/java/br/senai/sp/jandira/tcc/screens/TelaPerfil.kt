@@ -29,6 +29,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -44,9 +46,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
+import br.senai.sp.jandira.tcc.model.LoginUsuario
 
 @Composable
 fun TelaPerfil(navegacao: NavHostController?) {
+
+
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -69,6 +75,7 @@ fun TelaPerfil(navegacao: NavHostController?) {
                 .fillMaxSize()
                 .background(Color.Transparent)
         ) {
+            //Foto perfil
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -93,6 +100,7 @@ fun TelaPerfil(navegacao: NavHostController?) {
                         .padding(top = 10.dp)
                 )
 
+                //Campos
                 Card(
                     modifier = Modifier
                         .padding(top = 40.dp)
@@ -108,13 +116,12 @@ fun TelaPerfil(navegacao: NavHostController?) {
                         containerColor = Color.White
                     )
                 ) {
-                    //Campos
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
                             .background(Color.White), //Do tamanho do card
                         horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
+                    ){
                         Column(
                             modifier = Modifier
                                 .padding(top = 70.dp)
@@ -271,9 +278,10 @@ fun TelaPerfil(navegacao: NavHostController?) {
                     }
                 }
 
+                //Barra Inferior
                 Card(
                     modifier = Modifier
-                        .padding(top = 80.dp)
+                        .padding(top = 20.dp)
                         .fillMaxWidth()
                         .height(65.dp),
                     shape = RoundedCornerShape(
@@ -286,8 +294,8 @@ fun TelaPerfil(navegacao: NavHostController?) {
                 ) {
                     Row(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(top = 14.dp),
+                            .padding(top = 14.dp)
+                            .fillMaxSize(),
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Image(
@@ -314,9 +322,11 @@ fun TelaPerfil(navegacao: NavHostController?) {
                             contentDescription = "",
                             modifier = Modifier
                                 .size(24.dp)
+                                .clickable { navegacao!!.navigate("") }
                         )
                     }
                 }
+
             }
         }
     }
