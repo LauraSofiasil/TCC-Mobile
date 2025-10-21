@@ -3,6 +3,7 @@ package br.senai.sp.jandira.tcc.screens
 import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -237,6 +238,7 @@ fun TelaLogin(navegacao: NavHostController?) {
                         color = Color.White,
                         modifier = Modifier
                             .height(20.dp)
+                            .clickable { navegacao!!.navigate("cadastro") }
                     )
                     Text(
                         text = "Esqueci minha senha",
@@ -245,6 +247,7 @@ fun TelaLogin(navegacao: NavHostController?) {
                         color = Color.White,
                         modifier = Modifier
                             .height(20.dp)
+                            .clickable { navegacao!!.navigate("recuperacao")}
                     )
                 }
                 Column(
@@ -320,7 +323,7 @@ fun TelaLogin(navegacao: NavHostController?) {
                             navegacao!!.navigate("home")
                         }
                     ) {
-                        Text(text = "Entrar")
+                        Text(text = "Próximo")
                     }
                 }
             )

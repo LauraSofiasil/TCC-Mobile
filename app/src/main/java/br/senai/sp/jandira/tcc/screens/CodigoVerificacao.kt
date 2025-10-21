@@ -39,10 +39,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
 
 @Composable
-fun CodigoVerifucacao() {
+fun CodigoVerificacao(navegacao: NavHostController?) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -478,5 +479,5 @@ fun CodigoVerifucacao() {
 @Preview
 @Composable
 private fun CodigoVerificacaoPreview() {
-    CodigoVerifucacao()
+    CodigoVerificacao(null)
 }

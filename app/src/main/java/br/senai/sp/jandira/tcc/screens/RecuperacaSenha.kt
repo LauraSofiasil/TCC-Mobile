@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.tcc.screens
 
+import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -29,6 +30,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,15 +45,31 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
 import br.senai.sp.jandira.tcc.model.LoginUsuario
+import br.senai.sp.jandira.tcc.service.RetrofitFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.await
 
 @Composable
-fun RecuperacaoSenha() {
+fun RecuperacaoSenha(navegacao: NavHostController?) {
+
+    var emailUs by remember { mutableStateOf("") }
+    var isEmailError by remember { mutableStateOf(false) }
+
+    val usuarioApi = RetrofitFactory().getUsuarioService()
+
+    fun validar(): Boolean{
+        isEmailError = !Patterns.EMAIL_ADDRESS.matcher(emailUs).matches()
+        return !isEmailError
+    }
+
+    var mostrarMenssagemSucesso by remember { mutableStateOf(false) }
+
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -312,8 +333,8 @@ fun RecuperacaoSenha() {
                         )
                     }
                     TextField(
-                        value = "",
-                        onValueChange = {},
+                        value = emailUs,
+                        onValueChange = {emailUs = it},
                         colors = TextFieldDefaults.colors(
                             focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                             unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -346,7 +367,22 @@ fun RecuperacaoSenha() {
                     )
 
                     Button(
-                        onClick = {},
+                        onClick = {
+                            if(validar()){
+                                val body = LoginUsuario(
+                                    email = emailUs
+                                )
+                                GlobalScope.launch(Dispatchers.IO) {
+                                    val recuperacao = usuarioApi
+                                        .recuperacaoSenha(body)
+                                        .await()
+                                    println("Sucesso uhuuuull")
+                                    mostrarMenssagemSucesso = true
+                                }
+                            }else{
+                                println("Deu ERRADOOO")
+                            }
+                        },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xff1892FF)
                         ),
@@ -368,11 +404,42 @@ fun RecuperacaoSenha() {
                 }
             }
         }
+
+        if (mostrarMenssagemSucesso){
+            AlertDialog(
+                onDismissRequest = {
+                    mostrarMenssagemSucesso = false
+                    emailUs = ""
+                },
+                text = {
+                    Text(text = "Seja bem-vindo $emailUs!!")
+                },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            emailUs = ""
+                            mostrarMenssagemSucesso = false
+                        }
+                    ) {}
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = {
+                            navegacao!!.navigate("codigo")
+                        }
+                    ) {
+                        Text(text = "Entrar")
+                    }
+                }
+            )
+        }
     }
 }
+
+
 
 @Preview
 @Composable
 private fun RecuperacaoSenhaPreview() {
-    RecuperacaoSenha()
+    RecuperacaoSenha(null)
 }

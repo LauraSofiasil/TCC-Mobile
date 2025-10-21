@@ -51,7 +51,13 @@ import br.senai.sp.jandira.tcc.model.LoginUsuario
 @Composable
 fun TelaPerfil(navegacao: NavHostController?) {
 
+    var nomeUsuario = remember{ mutableStateOf(value = "Rafaela Santos") }
+    var emailUsuario = remember{ mutableStateOf(value = "rafinha@gmail.com") }
+    var senhaUsuario = remember{ mutableStateOf(value = "santoss") }
 
+    val dados =
+
+    //val userName = userFile.getString("user_name", "")
 
     Box(
         modifier = Modifier
@@ -143,8 +149,8 @@ fun TelaPerfil(navegacao: NavHostController?) {
                                 Spacer(modifier = Modifier.height(5.dp))
 
                                 TextField(
-                                    value = "",
-                                    onValueChange = {},
+                                    value = nomeUsuario.value,
+                                    onValueChange = {nomeUsuario.value = it},
                                     colors = TextFieldDefaults.colors(
                                         focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                                         unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -155,9 +161,6 @@ fun TelaPerfil(navegacao: NavHostController?) {
                                         unfocusedIndicatorColor = Color(0xff0D5692), //Cor da linha de baixo - usuário não clicou
 
                                     ),
-                                    placeholder = {
-                                        Text("Edite seu nome...", color = Color(0xff949494))
-                                    },
                                     leadingIcon = {
                                         Icon(
                                             imageVector = Icons.Default.Person,
@@ -193,8 +196,8 @@ fun TelaPerfil(navegacao: NavHostController?) {
                                 Spacer(modifier = Modifier.height(8.dp))
 
                                 TextField(
-                                    value = "",
-                                    onValueChange = {},
+                                    value = emailUsuario.value,
+                                    onValueChange = {emailUsuario.value = it},
                                     colors = TextFieldDefaults.colors(
                                         focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                                         unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -204,9 +207,6 @@ fun TelaPerfil(navegacao: NavHostController?) {
                                         focusedIndicatorColor = Color(0xff0D5692), //Cor da linha de baixo - usuário clicou
                                         unfocusedIndicatorColor = Color(0xff0D5692) //Cor da linha de baixo - usuário não clicou
                                     ),
-                                    placeholder = {
-                                        Text("Edite seu email...", color = Color(0xff949494))
-                                    },
                                     leadingIcon = {
                                         Icon(
                                             imageVector = Icons.Default.Email,
@@ -242,8 +242,8 @@ fun TelaPerfil(navegacao: NavHostController?) {
                                 Spacer(modifier = Modifier.height(8.dp))
 
                                 TextField(
-                                    value = "",
-                                    onValueChange = {},
+                                    value = senhaUsuario.value,
+                                    onValueChange = {senhaUsuario.value},
                                     colors = TextFieldDefaults.colors(
                                         focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                                         unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -253,9 +253,6 @@ fun TelaPerfil(navegacao: NavHostController?) {
                                         focusedIndicatorColor = Color(0xff0D5692), //Cor da linha de baixo - usuário clicou
                                         unfocusedIndicatorColor = Color(0xff0D5692) //Cor da linha de baixo - usuário não clicou
                                     ),
-                                    placeholder = {
-                                        Text("Edite sua senha...", color = Color(0xff949494))
-                                    },
                                     leadingIcon = {
                                         Icon(
                                             imageVector = Icons.Default.Lock,
@@ -281,7 +278,7 @@ fun TelaPerfil(navegacao: NavHostController?) {
                 //Barra Inferior
                 Card(
                     modifier = Modifier
-                        .padding(top = 20.dp)
+                        .padding(top = 80.dp)
                         .fillMaxWidth()
                         .height(65.dp),
                     shape = RoundedCornerShape(
