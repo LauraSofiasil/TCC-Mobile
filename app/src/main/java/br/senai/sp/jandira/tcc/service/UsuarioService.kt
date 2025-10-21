@@ -4,8 +4,10 @@ import br.senai.sp.jandira.tcc.model.LoginUsuario
 import br.senai.sp.jandira.tcc.model.Usuario
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface UsuarioService {
 
@@ -19,6 +21,15 @@ interface UsuarioService {
     @POST("usuario/login") //diz para o retrofit que a função abaixo é um post
     fun loginUsuario(@Body loginUsuario: LoginUsuario ): Call<Usuario>
 
+    //Listar dados do login
+    @GET("usuario/login")
+    fun listarDados(): Call<LoginUsuario>
+
+    //Listar dados de um usuário específico do login
+    @GET("usuario/login/{id}")
+    fun buscarUsuarioID(@Path("id") id: Long): Call<LoginUsuario>
+
+    //Listar todos os usuários
 //    @GET("usuario")
 //    fun listarUsuarios(): Call<Usuario>
 //

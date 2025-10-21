@@ -13,12 +13,13 @@ import br.senai.sp.jandira.tcc.screens.TelaInicial
 import br.senai.sp.jandira.tcc.screens.TelaInicial2
 import br.senai.sp.jandira.tcc.screens.TelaLogin
 import br.senai.sp.jandira.tcc.screens.TelaPerfil
+import br.senai.sp.jandira.tcc.R
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
+        setContent() {
             val navegacao = rememberNavController()
             NavHost(
                 navController = navegacao,

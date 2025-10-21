@@ -71,4 +71,6 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose-android:2.9.3")
 
+    implementation("androidx.viewpager:viewpager:1.1.0")
+
 }
