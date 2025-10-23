@@ -60,7 +60,7 @@ fun RecuperacaoSenha(navegacao: NavHostController?) {
     var emailUs by remember { mutableStateOf("") }
     var isEmailError by remember { mutableStateOf(false) }
 
-    val usuarioApi = RetrofitFactory().getUsuarioService()
+    val usuarioApi = RetrofitFactory().getRecuperacaoService()
 
     fun validar(): Boolean{
         isEmailError = !Patterns.EMAIL_ADDRESS.matcher(emailUs).matches()

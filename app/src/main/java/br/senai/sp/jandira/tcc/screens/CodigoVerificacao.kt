@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.tcc.screens
 
+import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,6 +29,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,9 +46,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
+import br.senai.sp.jandira.tcc.model.Codigo
+import br.senai.sp.jandira.tcc.model.LoginUsuario
+import br.senai.sp.jandira.tcc.service.RetrofitFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.await
 
 @Composable
 fun CodigoVerificacao(navegacao: NavHostController?) {
+
+    var token by remember { mutableStateOf("") }
+    var isTokenError by remember { mutableStateOf(false) }
+
+    val recuperacaoApi = RetrofitFactory().getRecuperacaoService()
+
+    fun validar(): Boolean{
+        isTokenError = token.length < 3
+        return !isTokenError
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -451,7 +474,22 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                     )
 
                     Button(
-                        onClick = {},
+                        onClick = {
+                            if(validar()){
+                                val body = Codigo(
+                                    token = token
+                                )
+                                GlobalScope.launch(Dispatchers.IO) {
+                                    val codigo = recuperacaoApi
+                                        .codigoVerificacao(body)
+                                        .await()
+                                    println("Sucesso uhuuuull")
+                                    navegacao!!.navigate("novaSenha")
+                                }
+                            }else{
+                                println("Deu ERRADOOO")
+                            }
+                        },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xff1892FF)
                         ),

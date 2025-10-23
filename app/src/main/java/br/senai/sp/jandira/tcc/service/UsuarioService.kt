@@ -18,14 +18,7 @@ interface UsuarioService {
     //Login
     @Headers("Content-Type: application/json")
     @POST("usuario/login") //diz para o retrofit que a função abaixo é um post
-    fun loginUsuario(@Body loginUsuario: LoginUsuario ): Call<Usuario>
-
-    //Recuperação
-    @Headers("Content-Type: application/json")
-    @POST("solicitacao-de-senha") //diz para o retrofit que a função abaixo é um post
-    fun recuperacaoSenha(@Body recuperacao: LoginUsuario): Call<Recuperacao>
-
-
+    fun loginUsuario(@Body loginUsuario: LoginUsuario ): Call<LoginUsuario>
 
 //    //Listar dados do login
 //    @GET("usuario/login")

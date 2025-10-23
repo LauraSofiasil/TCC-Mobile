@@ -27,6 +27,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,10 +42,32 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
+import br.senai.sp.jandira.tcc.model.Codigo
+import br.senai.sp.jandira.tcc.model.NovaSenha
+import br.senai.sp.jandira.tcc.service.RetrofitFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.await
 
 @Composable
-fun NovaSenha(modifier: Modifier = Modifier) {
+fun NovaSenha(navegacao: NavHostController?) {
+
+    var token by remember { mutableStateOf("") }
+    var senha by remember { mutableStateOf("") }
+    var isTokenError by remember { mutableStateOf(false) }
+    var isSenhaError by remember { mutableStateOf(false) }
+
+    val recuperacaoApi = RetrofitFactory().getRecuperacaoService()
+
+    fun validar(): Boolean{
+        isTokenError = token.length < 3
+        isSenhaError = senha.length < 3
+        return !isTokenError && !isSenhaError
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -355,7 +381,23 @@ fun NovaSenha(modifier: Modifier = Modifier) {
                     )
 
                     Button(
-                        onClick = {},
+                        onClick = {
+                            if(validar()){
+                                val body = NovaSenha(
+                                    token = token,
+                                    senha = senha
+                                )
+                                GlobalScope.launch(Dispatchers.IO) {
+                                    val novaSenha = recuperacaoApi
+                                        .novaSenha(body)
+                                        .await()
+                                    println("Sucesso uhuuuull")
+                                    navegacao!!.navigate("login")
+                                }
+                            }else{
+                                println("Deu ERRADOOO")
+                            }
+                        },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xff1892FF)
                         ),
@@ -383,5 +425,5 @@ fun NovaSenha(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun NovaSenhaPreview() {
-    NovaSenha()
+    NovaSenha(null)
 }

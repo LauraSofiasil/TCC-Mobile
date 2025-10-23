@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.senai.sp.jandira.tcc.screens.CodigoVerificacao
+import br.senai.sp.jandira.tcc.screens.NovaSenha
 import br.senai.sp.jandira.tcc.screens.TelaCadastro
 import br.senai.sp.jandira.tcc.screens.TelaHome
 import br.senai.sp.jandira.tcc.screens.TelaInicial
@@ -34,6 +36,7 @@ class MainActivity : ComponentActivity() {
                 composable(route = "perfil") { TelaPerfil(navegacao) }
                 composable(route = "recuperacao") { RecuperacaoSenha(navegacao) }
                 composable(route = "codigo") { CodigoVerificacao(navegacao) }
+                composable(route = "novaSenha") { NovaSenha(navegacao) }
             }
         }
 

@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.tcc.service
 
+import br.senai.sp.jandira.tcc.screens.RecuperacaoSenha
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -15,5 +16,9 @@ class RetrofitFactory {
 
     fun getUsuarioService(): UsuarioService{
         return retrofitFactory.create(UsuarioService::class.java)
+    }
+
+    fun getRecuperacaoService(): RecuperacaoService{
+        return retrofitFactory.create(RecuperacaoService::class.java)
     }
 }
