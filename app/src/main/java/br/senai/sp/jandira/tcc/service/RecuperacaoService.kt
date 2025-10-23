@@ -18,11 +18,11 @@ interface RecuperacaoService {
 
     //Código de Verificação
     @Headers("Content-Type: application/json")
-    @POST("solicitacao-de-senha")
+    @POST("/v1/teajuda/validar-token")
     fun codigoVerificacao(@Body codigo: Codigo): Call<Codigo>
 
     //Nova Senha
     @Headers("Content-Type: application/json")
-    @POST("solicitacao-de-senha")
+    @POST("/v1/teajuda/redefinir-senha")
     fun novaSenha(@Body novaSenha: NovaSenha): Call<NovaSenha>
 }

@@ -17,6 +17,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -24,6 +25,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -67,6 +69,9 @@ fun NovaSenha(navegacao: NavHostController?) {
         isSenhaError = senha.length < 3
         return !isTokenError && !isSenhaError
     }
+
+    var mostrarMenssagemSucesso by remember { mutableStateOf(false) }
+
 
     Box(
         modifier = Modifier
@@ -273,6 +278,8 @@ fun NovaSenha(navegacao: NavHostController?) {
             }
         }
     }
+
+    //Modal
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -312,8 +319,8 @@ fun NovaSenha(navegacao: NavHostController?) {
                     )
 
                     TextField(
-                        value = "",
-                        onValueChange = {},
+                        value = token,
+                        onValueChange = {token = it},
                         colors = TextFieldDefaults.colors(
                             focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                             unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -324,7 +331,7 @@ fun NovaSenha(navegacao: NavHostController?) {
                             unfocusedIndicatorColor = Color(0xFF949494) //Cor da linha de baixo - usuário não clicou
                         ),
                         placeholder = {
-                            Text("Digite a nova senha", color = Color(0xff949494))
+                            Text("Digite o token", color = Color(0xff949494))
                         },
                         leadingIcon = {
                             Icon(
@@ -346,8 +353,8 @@ fun NovaSenha(navegacao: NavHostController?) {
                         )
                     )
                     TextField(
-                        value = "",
-                        onValueChange = {},
+                        value = senha,
+                        onValueChange = {senha = it},
                         colors = TextFieldDefaults.colors(
                             focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                             unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -358,7 +365,7 @@ fun NovaSenha(navegacao: NavHostController?) {
                             unfocusedIndicatorColor = Color(0xFF949494) //Cor da linha de baixo - usuário não clicou
                         ),
                         placeholder = {
-                            Text("Confirme a nova senha", color = Color(0xff949494))
+                            Text("Digite a nova senha", color = Color(0xff949494))
                         },
                         leadingIcon = {
                             Icon(
@@ -392,7 +399,7 @@ fun NovaSenha(navegacao: NavHostController?) {
                                         .novaSenha(body)
                                         .await()
                                     println("Sucesso uhuuuull")
-                                    navegacao!!.navigate("login")
+                                    mostrarMenssagemSucesso = true
                                 }
                             }else{
                                 println("Deu ERRADOOO")
@@ -418,6 +425,35 @@ fun NovaSenha(navegacao: NavHostController?) {
                     }
                 }
             }
+        }
+        if (mostrarMenssagemSucesso){
+            AlertDialog(
+                onDismissRequest = {
+                    mostrarMenssagemSucesso = false
+                    token = ""
+                    senha = ""
+                },
+                text = {
+                },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            token = ""
+                            senha = ""
+                            mostrarMenssagemSucesso = false
+                        }
+                    ) {}
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = {
+                            navegacao!!.navigate("login")
+                        }
+                    ) {
+                        Text(text = "Sucesso!!")
+                    }
+                }
+            )
         }
     }
 }

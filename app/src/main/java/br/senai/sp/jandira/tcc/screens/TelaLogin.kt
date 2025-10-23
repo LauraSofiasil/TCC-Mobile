@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.AlertDialog
@@ -173,7 +174,18 @@ fun TelaLogin(navegacao: NavHostController?) {
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Email,
                             imeAction = ImeAction.Next
-                        )
+                        ),
+                        isError = isEmailError, //Estilo de erro vermelho
+                        supportingText = {
+                            if (isEmailError){
+                                Text(text = "Email é obrigatório!")
+                            }
+                        },
+                        trailingIcon = {
+                            if(isEmailError){
+                                Icon(imageVector = Icons.Default.Info, contentDescription = "Alerta")
+                            }
+                        }
                     )
                 }
 
@@ -222,7 +234,18 @@ fun TelaLogin(navegacao: NavHostController?) {
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Text,
                             imeAction = ImeAction.Next
-                        )
+                        ),
+                        isError = isSenhaError, //Estilo de erro vermelho
+                        supportingText = {
+                            if (isSenhaError){
+                                Text(text = "Senha é obrigatório!")
+                            }
+                        },
+                        trailingIcon = {
+                            if(isSenhaError){
+                                Icon(imageVector = Icons.Default.Info, contentDescription = "Alerta")
+                            }
+                        }
                     )
                 }
 

@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.AlertDialog
@@ -23,6 +24,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
@@ -62,6 +64,9 @@ fun TelaCadastro(navegacao: NavHostController?) {
 
     var isNomeError by remember { mutableStateOf(false) }
     var isEmailError by remember { mutableStateOf(false) }
+    var isSenhaError by remember { mutableStateOf(false) }
+    var isConfirmarError by remember { mutableStateOf(false) }
+    var isValidarSenhaError by remember { mutableStateOf(false) }
 
     //Variável determina se a menssagem deve aparecer
     var mostrarMenssagemSucesso by remember { mutableStateOf(false) }
@@ -69,7 +74,10 @@ fun TelaCadastro(navegacao: NavHostController?) {
     fun validar(): Boolean{
         isNomeError = nomeUsuario.length < 3
         isEmailError = !Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        return !isNomeError && !isEmailError
+        isSenhaError = senha.length < 3
+        isConfirmarError = confirmar.length < 3
+        isValidarSenhaError = senha != confirmar
+        return !isNomeError && !isEmailError && !isSenhaError && !isConfirmarError && !isValidarSenhaError
     }
 
     //Criar uma estância da conexão com a API
@@ -133,11 +141,10 @@ fun TelaCadastro(navegacao: NavHostController?) {
                 )
             }
 
-            Spacer(modifier = Modifier.height(80.dp))
-
             //Conteúdo
             Column(
                 modifier = Modifier
+                    .padding(top = 60.dp)
                     .fillMaxWidth()
                     .background(Color.Transparent),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -183,12 +190,23 @@ fun TelaCadastro(navegacao: NavHostController?) {
                         },
                         modifier = Modifier
                             .width(285.dp)
-                            .height(52.dp),
+                            .height(75.dp),
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Text,
                             imeAction = ImeAction.Next
-                        )
+                        ),
+                        isError = isNomeError, //Estilo de erro vermelho
+                        supportingText = {
+                            if (isNomeError){
+                                Text(text = "Nome é obrigatório!")
+                            }
+                        },
+                        trailingIcon = {
+                            if(isNomeError){
+                                Icon(imageVector = Icons.Default.Info, contentDescription = "Alerta")
+                            }
+                        }
                     )
                 }
 
@@ -234,12 +252,23 @@ fun TelaCadastro(navegacao: NavHostController?) {
                         },
                         modifier = Modifier
                             .width(285.dp)
-                            .height(52.dp),
+                            .height(75.dp),
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Email,
                             imeAction = ImeAction.Next
-                        )
+                        ),
+                        isError = isEmailError, //Estilo de erro vermelho
+                        supportingText = {
+                            if (isEmailError){
+                                Text(text = "Email é obrigatório!")
+                            }
+                        },
+                        trailingIcon = {
+                            if(isEmailError){
+                                Icon(imageVector = Icons.Default.Info, contentDescription = "Alerta")
+                            }
+                        }
                     )
                 }
 
@@ -284,12 +313,23 @@ fun TelaCadastro(navegacao: NavHostController?) {
                         },
                         modifier = Modifier
                             .width(285.dp)
-                            .height(52.dp),
+                            .height(75.dp),
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Password,
                             imeAction = ImeAction.Next
-                        )
+                        ),
+                        isError = isSenhaError, //Estilo de erro vermelho
+                        supportingText = {
+                            if (isSenhaError){
+                                Text(text = "Senha é obrigatório!")
+                            }
+                        },
+                        trailingIcon = {
+                            if(isSenhaError){
+                                Icon(imageVector = Icons.Default.Info, contentDescription = "Alerta")
+                            }
+                        }
                     )
                 }
 
@@ -334,12 +374,29 @@ fun TelaCadastro(navegacao: NavHostController?) {
                         },
                         modifier = Modifier
                             .width(285.dp)
-                            .height(53.dp),
+                            .height(75.dp),
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Password,
                             imeAction = ImeAction.Next
-                        )
+                        ),
+                        isError = isConfirmarError && isValidarSenhaError, //Estilo de erro vermelho
+                        supportingText = {
+                            if (isConfirmarError){
+                                Text(text = "Confirmar senha é obrigatório!")
+                            }
+                            if(isValidarSenhaError){
+                                Text(text = "As senhas estão diferentes!")
+                            }
+                        },
+                        trailingIcon = {
+                            if(isConfirmarError){
+                                Icon(imageVector = Icons.Default.Info, contentDescription = "Alerta")
+                            }
+                            if(isValidarSenhaError){
+                                Icon(imageVector = Icons.Default.Info, contentDescription = "Alerta")
+                            }
+                        }
                     )
                 }
             }
@@ -348,7 +405,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 140.dp)
+                    .padding(top = 100.dp)
                     .background(Color.Transparent),
                 horizontalAlignment = Alignment.End
             ) {

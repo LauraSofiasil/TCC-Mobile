@@ -412,7 +412,6 @@ fun RecuperacaoSenha(navegacao: NavHostController?) {
                     emailUs = ""
                 },
                 text = {
-                    Text(text = "Seja bem-vindo $emailUs!!")
                 },
                 confirmButton = {
                     TextButton(
@@ -428,7 +427,7 @@ fun RecuperacaoSenha(navegacao: NavHostController?) {
                             navegacao!!.navigate("codigo")
                         }
                     ) {
-                        Text(text = "Entrar")
+                        Text(text = "Próximo")
                     }
                 }
             )

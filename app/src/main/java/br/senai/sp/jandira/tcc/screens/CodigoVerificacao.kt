@@ -19,6 +19,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -26,6 +27,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -49,6 +51,7 @@ import br.senai.sp.jandira.tcc.R
 import br.senai.sp.jandira.tcc.model.Codigo
 import br.senai.sp.jandira.tcc.model.LoginUsuario
 import br.senai.sp.jandira.tcc.service.RetrofitFactory
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -66,6 +69,8 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
         isTokenError = token.length < 3
         return !isTokenError
     }
+
+    var mostrarMenssagemSucesso by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -326,8 +331,8 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                         horizontalArrangement = Arrangement.Center
                     ) {
                         TextField(
-                            value = "",
-                            onValueChange = {},
+                            value = token,
+                            onValueChange = {token = it},
                             colors = TextFieldDefaults.colors(
                                 focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                                 unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -338,7 +343,7 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                                 unfocusedIndicatorColor = Color(0xFF949494) //Cor da linha de baixo - usuário não clicou
                             ),
                             modifier = Modifier
-                                .width(34.dp)
+                                .width(290.dp)
                                 .height(52.dp),
                             shape = RoundedCornerShape(10.dp),
                             keyboardOptions = KeyboardOptions(
@@ -346,116 +351,116 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                                 imeAction = ImeAction.Next
                             )
                         )
-                        Spacer(modifier = Modifier.width(17.dp))
-                        TextField(
-                            value = "",
-                            onValueChange = {},
-                            colors = TextFieldDefaults.colors(
-                                focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
-                                unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
-                                cursorColor = Color.Black, //Cor do cursor enquanto digita
-                                focusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário clicou
-                                unfocusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário não clicou
-                                focusedIndicatorColor = Color(0xFF949494), //Cor da linha de baixo - usuário clicou
-                                unfocusedIndicatorColor = Color(0xFF949494) //Cor da linha de baixo - usuário não clicou
-                            ),
-                            modifier = Modifier
-                                .width(34.dp)
-                                .height(52.dp),
-                            shape = RoundedCornerShape(10.dp),
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Number,
-                                imeAction = ImeAction.Next
-                            )
-                        )
-                        Spacer(modifier = Modifier.width(17.dp))
-                        TextField(
-                            value = "",
-                            onValueChange = {},
-                            colors = TextFieldDefaults.colors(
-                                focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
-                                unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
-                                cursorColor = Color.Black, //Cor do cursor enquanto digita
-                                focusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário clicou
-                                unfocusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário não clicou
-                                focusedIndicatorColor = Color(0xFF949494), //Cor da linha de baixo - usuário clicou
-                                unfocusedIndicatorColor = Color(0xFF949494) //Cor da linha de baixo - usuário não clicou
-                            ),
-                            modifier = Modifier
-                                .width(34.dp)
-                                .height(52.dp),
-                            shape = RoundedCornerShape(10.dp),
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Number,
-                                imeAction = ImeAction.Next
-                            )
-                        )
-                        Spacer(modifier = Modifier.width(17.dp))
-                        TextField(
-                            value = "",
-                            onValueChange = {},
-                            colors = TextFieldDefaults.colors(
-                                focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
-                                unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
-                                cursorColor = Color.Black, //Cor do cursor enquanto digita
-                                focusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário clicou
-                                unfocusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário não clicou
-                                focusedIndicatorColor = Color(0xFF949494), //Cor da linha de baixo - usuário clicou
-                                unfocusedIndicatorColor = Color(0xFF949494) //Cor da linha de baixo - usuário não clicou
-                            ),
-                            modifier = Modifier
-                                .width(34.dp)
-                                .height(52.dp),
-                            shape = RoundedCornerShape(10.dp),
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Number,
-                                imeAction = ImeAction.Next
-                            )
-                        )
-                        Spacer(modifier = Modifier.width(17.dp))
-                        TextField(
-                            value = "",
-                            onValueChange = {},
-                            colors = TextFieldDefaults.colors(
-                                focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
-                                unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
-                                cursorColor = Color.Black, //Cor do cursor enquanto digita
-                                focusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário clicou
-                                unfocusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário não clicou
-                                focusedIndicatorColor = Color(0xFF949494), //Cor da linha de baixo - usuário clicou
-                                unfocusedIndicatorColor = Color(0xFF949494) //Cor da linha de baixo - usuário não clicou
-                            ),
-                            modifier = Modifier
-                                .width(34.dp)
-                                .height(52.dp),
-                            shape = RoundedCornerShape(10.dp),
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Number,
-                                imeAction = ImeAction.Next
-                            )
-                        )
-                        Spacer(modifier = Modifier.width(17.dp))
-                        TextField(
-                            value = "",
-                            onValueChange = {},
-                            colors = TextFieldDefaults.colors(
-                                focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
-                                unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
-                                cursorColor = Color.Black, //Cor do cursor enquanto digita
-                                focusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário clicou
-                                unfocusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário não clicou
-                                focusedIndicatorColor = Color(0xFF949494), //Cor da linha de baixo - usuário clicou
-                                unfocusedIndicatorColor = Color(0xFF949494) //Cor da linha de baixo - usuário não clicou
-                            ),
-                            modifier = Modifier
-                                .width(34.dp)
-                                .height(52.dp),
-                            shape = RoundedCornerShape(10.dp),
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Number,
-                                imeAction = ImeAction.Next
-                            )
-                        )
+//                        Spacer(modifier = Modifier.width(17.dp))
+//                        TextField(
+//                            value = "",
+//                            onValueChange = {},
+//                            colors = TextFieldDefaults.colors(
+//                                focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
+//                                unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
+//                                cursorColor = Color.Black, //Cor do cursor enquanto digita
+//                                focusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário clicou
+//                                unfocusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário não clicou
+//                                focusedIndicatorColor = Color(0xFF949494), //Cor da linha de baixo - usuário clicou
+//                                unfocusedIndicatorColor = Color(0xFF949494) //Cor da linha de baixo - usuário não clicou
+//                            ),
+//                            modifier = Modifier
+//                                .width(34.dp)
+//                                .height(52.dp),
+//                            shape = RoundedCornerShape(10.dp),
+//                            keyboardOptions = KeyboardOptions(
+//                                keyboardType = KeyboardType.Number,
+//                                imeAction = ImeAction.Next
+//                            )
+//                        )
+//                        Spacer(modifier = Modifier.width(17.dp))
+//                        TextField(
+//                            value = "",
+//                            onValueChange = {},
+//                            colors = TextFieldDefaults.colors(
+//                                focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
+//                                unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
+//                                cursorColor = Color.Black, //Cor do cursor enquanto digita
+//                                focusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário clicou
+//                                unfocusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário não clicou
+//                                focusedIndicatorColor = Color(0xFF949494), //Cor da linha de baixo - usuário clicou
+//                                unfocusedIndicatorColor = Color(0xFF949494) //Cor da linha de baixo - usuário não clicou
+//                            ),
+//                            modifier = Modifier
+//                                .width(34.dp)
+//                                .height(52.dp),
+//                            shape = RoundedCornerShape(10.dp),
+//                            keyboardOptions = KeyboardOptions(
+//                                keyboardType = KeyboardType.Number,
+//                                imeAction = ImeAction.Next
+//                            )
+//                        )
+//                        Spacer(modifier = Modifier.width(17.dp))
+//                        TextField(
+//                            value = "",
+//                            onValueChange = {},
+//                            colors = TextFieldDefaults.colors(
+//                                focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
+//                                unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
+//                                cursorColor = Color.Black, //Cor do cursor enquanto digita
+//                                focusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário clicou
+//                                unfocusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário não clicou
+//                                focusedIndicatorColor = Color(0xFF949494), //Cor da linha de baixo - usuário clicou
+//                                unfocusedIndicatorColor = Color(0xFF949494) //Cor da linha de baixo - usuário não clicou
+//                            ),
+//                            modifier = Modifier
+//                                .width(34.dp)
+//                                .height(52.dp),
+//                            shape = RoundedCornerShape(10.dp),
+//                            keyboardOptions = KeyboardOptions(
+//                                keyboardType = KeyboardType.Number,
+//                                imeAction = ImeAction.Next
+//                            )
+//                        )
+//                        Spacer(modifier = Modifier.width(17.dp))
+//                        TextField(
+//                            value = "",
+//                            onValueChange = {},
+//                            colors = TextFieldDefaults.colors(
+//                                focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
+//                                unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
+//                                cursorColor = Color.Black, //Cor do cursor enquanto digita
+//                                focusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário clicou
+//                                unfocusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário não clicou
+//                                focusedIndicatorColor = Color(0xFF949494), //Cor da linha de baixo - usuário clicou
+//                                unfocusedIndicatorColor = Color(0xFF949494) //Cor da linha de baixo - usuário não clicou
+//                            ),
+//                            modifier = Modifier
+//                                .width(34.dp)
+//                                .height(52.dp),
+//                            shape = RoundedCornerShape(10.dp),
+//                            keyboardOptions = KeyboardOptions(
+//                                keyboardType = KeyboardType.Number,
+//                                imeAction = ImeAction.Next
+//                            )
+//                        )
+//                        Spacer(modifier = Modifier.width(17.dp))
+//                        TextField(
+//                            value = "",
+//                            onValueChange = {},
+//                            colors = TextFieldDefaults.colors(
+//                                focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
+//                                unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
+//                                cursorColor = Color.Black, //Cor do cursor enquanto digita
+//                                focusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário clicou
+//                                unfocusedContainerColor = Color(0xffD9D9D9), //Cor do fundo - usuário não clicou
+//                                focusedIndicatorColor = Color(0xFF949494), //Cor da linha de baixo - usuário clicou
+//                                unfocusedIndicatorColor = Color(0xFF949494) //Cor da linha de baixo - usuário não clicou
+//                            ),
+//                            modifier = Modifier
+//                                .width(34.dp)
+//                                .height(52.dp),
+//                            shape = RoundedCornerShape(10.dp),
+//                            keyboardOptions = KeyboardOptions(
+//                                keyboardType = KeyboardType.Number,
+//                                imeAction = ImeAction.Next
+//                            )
+//                        )
                     }
 
                     Text(
@@ -478,7 +483,7 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                                         .codigoVerificacao(body)
                                         .await()
                                     println("Sucesso uhuuuull")
-                                    navegacao!!.navigate("novaSenha")
+                                    mostrarMenssagemSucesso = true
                                 }
                             }else{
                                 println("Deu ERRADOOO")
@@ -503,6 +508,33 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                         )
                     }
                 }
+            }
+            if (mostrarMenssagemSucesso){
+                AlertDialog(
+                    onDismissRequest = {
+                        mostrarMenssagemSucesso = false
+                        token = ""
+                    },
+                    text = {
+                    },
+                    confirmButton = {
+                        TextButton(
+                            onClick = {
+                                token = ""
+                                mostrarMenssagemSucesso = false
+                            }
+                        ) {}
+                    },
+                    dismissButton = {
+                        TextButton(
+                            onClick = {
+                                navegacao!!.navigate("novaSenha")
+                            }
+                        ) {
+                            Text(text = "Próximo")
+                        }
+                    }
+                )
             }
         }
     }
