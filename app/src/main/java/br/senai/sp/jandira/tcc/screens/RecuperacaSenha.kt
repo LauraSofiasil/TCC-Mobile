@@ -139,8 +139,8 @@ fun RecuperacaoSenha(navegacao: NavHostController?) {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     TextField(
-                        value = "",
-                        onValueChange = {},
+                        value = emailUs,
+                        onValueChange = {emailUs = it},
                         colors = TextFieldDefaults.colors(
                             focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                             unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou

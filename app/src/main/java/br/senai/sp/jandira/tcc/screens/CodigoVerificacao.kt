@@ -147,9 +147,6 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                             focusedIndicatorColor = Color.Transparent, //Cor da linha de baixo - usuário clicou
                             unfocusedIndicatorColor = Color.Transparent //Cor da linha de baixo - usuário não clicou
                         ),
-                        placeholder = {
-                            Text("Digite seu email...", color = Color(0xff949494))
-                        },
                         leadingIcon = {
                             Icon(
                                 imageVector = Icons.Default.Person,
@@ -196,9 +193,6 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                             focusedIndicatorColor = Color.Transparent, //Cor da linha de baixo - usuário clicou
                             unfocusedIndicatorColor = Color.Transparent //Cor da linha de baixo - usuário não clicou
                         ),
-                        placeholder = {
-                            Text("Digite sua senha...", color = Color(0xff949494))
-                        },
                         leadingIcon = {
                             Icon(
                                 imageVector = Icons.Default.Lock,
@@ -348,7 +342,7 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                                 .height(52.dp),
                             shape = RoundedCornerShape(10.dp),
                             keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Password,
+                                keyboardType = KeyboardType.Number,
                                 imeAction = ImeAction.Next
                             )
                         )
@@ -370,7 +364,7 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                                 .height(52.dp),
                             shape = RoundedCornerShape(10.dp),
                             keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Password,
+                                keyboardType = KeyboardType.Number,
                                 imeAction = ImeAction.Next
                             )
                         )
@@ -392,7 +386,7 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                                 .height(52.dp),
                             shape = RoundedCornerShape(10.dp),
                             keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Password,
+                                keyboardType = KeyboardType.Number,
                                 imeAction = ImeAction.Next
                             )
                         )
@@ -414,7 +408,7 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                                 .height(52.dp),
                             shape = RoundedCornerShape(10.dp),
                             keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Password,
+                                keyboardType = KeyboardType.Number,
                                 imeAction = ImeAction.Next
                             )
                         )
@@ -436,7 +430,7 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                                 .height(52.dp),
                             shape = RoundedCornerShape(10.dp),
                             keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Password,
+                                keyboardType = KeyboardType.Number,
                                 imeAction = ImeAction.Next
                             )
                         )
@@ -458,7 +452,7 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                                 .height(52.dp),
                             shape = RoundedCornerShape(10.dp),
                             keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Password,
+                                keyboardType = KeyboardType.Number,
                                 imeAction = ImeAction.Next
                             )
                         )
