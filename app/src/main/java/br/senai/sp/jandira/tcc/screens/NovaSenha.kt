@@ -52,6 +52,7 @@ import br.senai.sp.jandira.tcc.service.RetrofitFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.await
 
 @Composable
@@ -399,7 +400,9 @@ fun NovaSenha(navegacao: NavHostController?) {
                                         .novaSenha(body)
                                         .await()
                                     println("Sucesso uhuuuull")
-                                    mostrarMenssagemSucesso = true
+                                    withContext(Dispatchers.Main) {
+                                        navegacao?.navigate("login")
+                                    }
                                 }
                             }else{
                                 println("Deu ERRADOOO")

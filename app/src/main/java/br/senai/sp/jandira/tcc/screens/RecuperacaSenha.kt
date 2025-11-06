@@ -52,6 +52,7 @@ import br.senai.sp.jandira.tcc.service.RetrofitFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.await
 
 @Composable
@@ -377,7 +378,9 @@ fun RecuperacaoSenha(navegacao: NavHostController?) {
                                         .recuperacaoSenha(body)
                                         .await()
                                     println("Sucesso uhuuuull")
-                                    mostrarMenssagemSucesso = true
+                                    withContext(Dispatchers.Main) {
+                                        navegacao?.navigate("codigo")
+                                    }
                                 }
                             }else{
                                 println("Deu ERRADOOO")

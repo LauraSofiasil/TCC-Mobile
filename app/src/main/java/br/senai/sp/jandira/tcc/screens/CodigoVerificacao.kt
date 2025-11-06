@@ -55,6 +55,7 @@ import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.await
 
 @Composable
@@ -483,7 +484,9 @@ fun CodigoVerificacao(navegacao: NavHostController?) {
                                         .codigoVerificacao(body)
                                         .await()
                                     println("Sucesso uhuuuull")
-                                    mostrarMenssagemSucesso = true
+                                    withContext(Dispatchers.Main) {
+                                        navegacao?.navigate("novaSenha")
+                                    }
                                 }
                             }else{
                                 println("Deu ERRADOOO")

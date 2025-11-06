@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.tcc.screens
 
+import android.content.Context
 import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -37,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -52,6 +54,7 @@ import br.senai.sp.jandira.tcc.service.RetrofitFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.await
 
 
@@ -72,6 +75,25 @@ fun TelaLogin(navegacao: NavHostController?) {
         isEmailError = !Patterns.EMAIL_ADDRESS.matcher(emailUs).matches()
         isSenhaError = senhaUs.length < 3
         return !isSenhaError && !isEmailError
+    }
+
+    //Context -> objeto, possui SharedPreferences
+    val context = LocalContext.current
+
+    //Armazena os dados localmente, salva no SharedPreferences assim que o login é sucedido
+    fun salvarUsuario(context: Context, email: String, senha: String) {
+        val dados = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        dados.edit()
+            .putString("user_email", email)
+            .putString("user_password", senha)
+            .apply()
+    }
+
+    fun lerUsuario(context: Context): Pair<String?, String?> {
+        val dados = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val email = dados.getString("user_email", null)
+        val senha = dados.getString("user_password", null)
+        return Pair(email, senha)
     }
 
     val usuarioApi = RetrofitFactory().getUsuarioService()
@@ -293,7 +315,10 @@ fun TelaLogin(navegacao: NavHostController?) {
                                         .loginUsuario(body)
                                         .await()
                                     println("Sucesso uhuuuull")
-                                    mostrarMenssagemSucesso = true
+                                    salvarUsuario(context, emailUs, senhaUs)
+                                    withContext(Dispatchers.Main) {
+                                        navegacao?.navigate("home")
+                                    }
                                 }
                             }else{
                                 println("Deu ERRADOOO")

@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.tcc.screens
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -35,12 +36,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -51,13 +54,17 @@ import br.senai.sp.jandira.tcc.model.LoginUsuario
 @Composable
 fun TelaPerfil(navegacao: NavHostController?) {
 
-    var nomeUsuario = remember{ mutableStateOf(value = "Rafaela Santos") }
-    var emailUsuario = remember{ mutableStateOf(value = "rafinha@gmail.com") }
-    var senhaUsuario = remember{ mutableStateOf(value = "santoss") }
+    val context = LocalContext.current
 
-    val dados =
+    val dados = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
 
-    //val userName = userFile.getString("user_name", "")
+    val emailSalvo = dados.getString("user_email", "") ?: ""
+    val senhaSalva = dados.getString("user_password", "") ?: ""
+
+    var nomeUsuario = remember{ mutableStateOf(value = "Laura Sofia") }
+    var emailUsuario = remember{ mutableStateOf(value = emailSalvo) }
+    var senhaUsuario = remember{ mutableStateOf(value = senhaSalva) }
+
 
     Box(
         modifier = Modifier
@@ -174,7 +181,7 @@ fun TelaPerfil(navegacao: NavHostController?) {
                                         .width(300.dp),
                                     shape = RoundedCornerShape(12.dp),
                                     keyboardOptions = KeyboardOptions(
-                                        keyboardType = KeyboardType.Number,
+                                        keyboardType = KeyboardType.Text,
                                         imeAction = ImeAction.Next
                                     )
                                 )
@@ -220,7 +227,7 @@ fun TelaPerfil(navegacao: NavHostController?) {
                                         .width(300.dp),
                                     shape = RoundedCornerShape(12.dp),
                                     keyboardOptions = KeyboardOptions(
-                                        keyboardType = KeyboardType.Number,
+                                        keyboardType = KeyboardType.Email,
                                         imeAction = ImeAction.Next
                                     )
                                 )
@@ -243,7 +250,7 @@ fun TelaPerfil(navegacao: NavHostController?) {
 
                                 TextField(
                                     value = senhaUsuario.value,
-                                    onValueChange = {senhaUsuario.value},
+                                    onValueChange = {senhaUsuario.value = it},
                                     colors = TextFieldDefaults.colors(
                                         focusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário clicou
                                         unfocusedTextColor = Color(0xff949494), //Cor do texto digitado - usuário não clicou
@@ -265,8 +272,9 @@ fun TelaPerfil(navegacao: NavHostController?) {
                                     modifier = Modifier
                                         .width(300.dp),
                                     shape = RoundedCornerShape(12.dp),
+                                    visualTransformation = PasswordVisualTransformation(), //Teste para esconder senha
                                     keyboardOptions = KeyboardOptions(
-                                        keyboardType = KeyboardType.Number,
+                                        keyboardType = KeyboardType.Password,
                                         imeAction = ImeAction.Next
                                     )
                                 )

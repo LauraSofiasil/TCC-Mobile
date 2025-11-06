@@ -39,36 +39,8 @@ class MainActivity : ComponentActivity() {
                 composable(route = "novaSenha") { NovaSenha(navegacao) }
             }
         }
-
-        //setContentView(R.layout.activity_main)
-
     }
 }
 
-    //Adapter = Gerencia as páginas dinâmicas
 
-    //Instancia
-//    private inner class TesteAdapter : PagerAdapter(){
-//        override fun instantiateItem(container: ViewGroup, position: Int): Any {
-//            val view = TipContentBinding.inflate(layoutInflater, container, false)
-//            view.tipTitle.text = "Texto trocado"
-//
-//            container.addView(view.root)
-//            return view
-//        }
-//
-//        //Remove o item
-//        override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-//            container.removeView(`object` as View)
-//        }
-//
-//        //Garantir que a view de cima está chegando certa
-//        override fun isViewFromObject(view: View, `object`: Any): Boolean {
-//            return view == `object`
-//        }
-//
-//        //Quantidade das páginas que serão construidas
-//        override fun getCount(): Int = 3
-//    }
-//}
 
