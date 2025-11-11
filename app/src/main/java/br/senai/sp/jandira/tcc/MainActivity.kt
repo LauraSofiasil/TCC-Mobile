@@ -17,6 +17,7 @@ import br.senai.sp.jandira.tcc.screens.TelaInicial2
 import br.senai.sp.jandira.tcc.screens.TelaLogin
 import br.senai.sp.jandira.tcc.screens.TelaPerfil
 import br.senai.sp.jandira.tcc.screens.RecuperacaoSenha
+import br.senai.sp.jandira.tcc.screens.TelaCalendario
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +38,7 @@ class MainActivity : ComponentActivity() {
                 composable(route = "recuperacao") { RecuperacaoSenha(navegacao) }
                 composable(route = "codigo") { CodigoVerificacao(navegacao) }
                 composable(route = "novaSenha") { NovaSenha(navegacao) }
+                composable(route = "calendario") { TelaCalendario(navegacao) }
             }
         }
     }
