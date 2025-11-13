@@ -107,7 +107,7 @@ fun TelaCalendario(navegacao: NavHostController?) {
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(vertical = 4.dp),
+                                    .padding(vertical = 3.dp),
                                 horizontalArrangement = Arrangement.SpaceAround
                             ) {
                                 semana.forEach { dia ->
