@@ -31,7 +31,6 @@ fun TelaCalendario(navegacao: NavHostController?) {
             .fillMaxSize()
             .background(Color.White)
     ) {
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -47,9 +46,8 @@ fun TelaCalendario(navegacao: NavHostController?) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Transparent)
-                .padding(horizontal = 20.dp)
         ) {
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -65,17 +63,16 @@ fun TelaCalendario(navegacao: NavHostController?) {
                 Image(
                     painter = painterResource(R.drawable.perfilicon),
                     contentDescription = "",
-                    modifier = Modifier.size(28.dp)
-                        .clickable { navegacao!!.navigate("perfil") }
-
+                    modifier = Modifier
+                        .size(28.dp)
+                        .clickable { navegacao?.navigate("perfil") }
                 )
             }
 
             Spacer(modifier = Modifier.height(25.dp))
 
             Card(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(15.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 elevation = CardDefaults.cardElevation(10.dp)
@@ -141,10 +138,8 @@ fun TelaCalendario(navegacao: NavHostController?) {
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // CARD AGENDA
             Card(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(15.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 elevation = CardDefaults.cardElevation(10.dp)
@@ -189,60 +184,56 @@ fun TelaCalendario(navegacao: NavHostController?) {
                     }
                 }
             }
+        }
 
-            Card(
+        Card(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .height(70.dp),
+            shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF1892FF)),
+            elevation = CardDefaults.cardElevation(10.dp)
+        ) {
+            Row(
                 modifier = Modifier
-                    .padding(top = 80.dp)
-                    .fillMaxWidth()
-                    .height(65.dp),
-                shape = RoundedCornerShape(
-                    topEnd = 10.dp,
-                    topStart = 10.dp
-                ),
-                colors = CardDefaults.cardColors(
-                    containerColor = Color(0xBA1892FF)
-                )
+                    .fillMaxSize()
+                    .padding(horizontal = 40.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(
+                Image(
+                    painter = painterResource(R.drawable.calendario),
+                    contentDescription = "",
                     modifier = Modifier
-                        .padding(top = 14.dp)
-                        .fillMaxSize(),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Image(
-                        painter = painterResource(R.drawable.calendario),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .size(24.dp)
-                            .clickable {navegacao!!.navigate("calendario")}
-                    )
-
-                    Spacer(modifier = Modifier.width(80.dp))
-
-                    Image(
-                        painter = painterResource(R.drawable.casinha),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .size(24.dp)
-                            .clickable { navegacao!!.navigate("home") }
-                    )
-
-                    Spacer(modifier = Modifier.width(80.dp))
-
-                    Image(
-                        painter = painterResource(R.drawable.medicina),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .size(24.dp)
-                            .clickable { navegacao!!.navigate("") }
-                    )
-                }
+                        .size(28.dp)
+                        .clickable { navegacao?.navigate("calendario") }
+                )
+                Image(
+                    painter = painterResource(R.drawable.casinha),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .size(28.dp)
+                        .clickable { navegacao?.navigate("home") }
+                )
+                Image(
+                    painter = painterResource(R.drawable.medicina),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .size(28.dp)
+                        .clickable { navegacao?.navigate("medicina") }
+                )
+                Image(
+                    painter = painterResource(R.drawable.local),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .size(28.dp)
+                        .clickable { navegacao?.navigate("mapa") }
+                )
             }
-
         }
     }
 }
-
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
