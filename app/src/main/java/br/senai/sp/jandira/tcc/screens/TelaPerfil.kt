@@ -308,6 +308,7 @@ fun TelaPerfil(navegacao: NavHostController?) {
                             contentDescription = "",
                             modifier = Modifier
                                 .size(24.dp)
+                                .clickable {navegacao!!.navigate("calendario")}
                         )
 
                         Spacer(modifier = Modifier.width(80.dp))

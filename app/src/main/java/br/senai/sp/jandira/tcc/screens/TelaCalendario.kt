@@ -2,6 +2,7 @@ package br.senai.sp.jandira.tcc.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -62,9 +63,11 @@ fun TelaCalendario(navegacao: NavHostController?) {
                     modifier = Modifier.size(28.dp)
                 )
                 Image(
-                    painter = painterResource(R.drawable.perfil),
+                    painter = painterResource(R.drawable.perfilicon),
                     contentDescription = "",
                     modifier = Modifier.size(28.dp)
+                        .clickable { navegacao!!.navigate("perfil") }
+
                 )
             }
 
@@ -189,7 +192,7 @@ fun TelaCalendario(navegacao: NavHostController?) {
 
             Card(
                 modifier = Modifier
-                    .padding(top = 40.dp)
+                    .padding(top = 80.dp)
                     .fillMaxWidth()
                     .height(65.dp),
                 shape = RoundedCornerShape(
@@ -209,7 +212,9 @@ fun TelaCalendario(navegacao: NavHostController?) {
                     Image(
                         painter = painterResource(R.drawable.calendario),
                         contentDescription = "",
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable {navegacao!!.navigate("calendario")}
                     )
 
                     Spacer(modifier = Modifier.width(80.dp))
@@ -217,7 +222,9 @@ fun TelaCalendario(navegacao: NavHostController?) {
                     Image(
                         painter = painterResource(R.drawable.casinha),
                         contentDescription = "",
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable { navegacao!!.navigate("home") }
                     )
 
                     Spacer(modifier = Modifier.width(80.dp))
@@ -225,13 +232,17 @@ fun TelaCalendario(navegacao: NavHostController?) {
                     Image(
                         painter = painterResource(R.drawable.medicina),
                         contentDescription = "",
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable { navegacao!!.navigate("") }
                     )
                 }
             }
+
         }
     }
 }
+
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
