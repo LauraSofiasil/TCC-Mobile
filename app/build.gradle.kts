@@ -45,7 +45,7 @@ android {
 }
 
 dependencies {
-
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -74,4 +74,12 @@ dependencies {
 //    implementation("androidx.viewpager:viewpager:1.1.0")
 
     implementation("androidx.viewpager:viewpager:1.1.0")
+    
+    // RecyclerView
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    
+    // AppCompat
+    implementation("androidx.appcompat:appcompat:1.6.1")
+
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 }

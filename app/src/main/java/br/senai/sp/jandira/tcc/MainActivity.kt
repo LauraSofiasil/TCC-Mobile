@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.tcc
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,27 +24,28 @@ import br.senai.sp.jandira.tcc.screens.TelaMapa
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent() {
-            val navegacao = rememberNavController()
-            NavHost(
-                navController = navegacao,
-                startDestination = "inicio"
-            ) {
-                composable(route = "inicio") { TelaInicial(navegacao) }
-                composable(route = "inicio2") { TelaInicial2(navegacao) }
-                composable(route = "login") { TelaLogin(navegacao) }
-                composable(route = "cadastro") { TelaCadastro(navegacao) }
-                composable(route = "home") { TelaHome(navegacao) }
-                composable(route = "perfil") { TelaPerfil(navegacao) }
-                composable(route = "recuperacao") { RecuperacaoSenha(navegacao) }
-                composable(route = "codigo") { CodigoVerificacao(navegacao) }
-                composable(route = "novaSenha") { NovaSenha(navegacao) }
-                composable(route = "calendario") { TelaCalendario(navegacao) }
-                composable(route = "mapa") { TelaMapa(navegacao) }
-
-            }
-        }
+        startActivity(Intent(this, CalendarioActivy::class.java))
+        finish()
+        //setContent() {
+            CalendarioActivy()
+//            val navegacao = rememberNavController()
+//            NavHost(
+//                navController = navegacao,
+//                startDestination = "inicio"
+//            ) {
+//                composable(route = "inicio") { TelaInicial(navegacao) }
+//                composable(route = "inicio2") { TelaInicial2(navegacao) }
+//                composable(route = "login") { TelaLogin(navegacao) }
+//                composable(route = "cadastro") { TelaCadastro(navegacao) }
+//                composable(route = "home") { TelaHome(navegacao) }
+//                composable(route = "perfil") { TelaPerfil(navegacao) }
+//                composable(route = "recuperacao") { RecuperacaoSenha(navegacao) }
+//                composable(route = "codigo") { CodigoVerificacao(navegacao) }
+//                composable(route = "novaSenha") { NovaSenha(navegacao) }
+//                composable(route = "calendario") { TelaCalendario(navegacao) }
+//                composable(route = "mapa") { TelaMapa(navegacao) }
+//            }
+        //}
     }
 }
 
