@@ -8,7 +8,7 @@ import br.senai.sp.jandira.tcc.R
 
 @Composable
 fun SlideHome(modifier: Modifier = Modifier) {
-    R.layout.activity_main
+
 
 }
 

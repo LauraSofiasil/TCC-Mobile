@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1"
 }
 
 android {
@@ -26,6 +28,9 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+            buildConfigField("String", "MAPS_API_KEY", "\"apikey_aqui\"")
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -40,12 +45,11 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
+        buildConfig = true
     }
 }
 
 dependencies {
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -54,6 +58,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -82,4 +87,6 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
 }

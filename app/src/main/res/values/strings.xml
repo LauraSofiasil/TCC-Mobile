@@ -3,4 +3,5 @@
     <string name="numero">numero</string>
     <string name="back"><![CDATA[<-]]></string>
     <string name="next"><![CDATA[->]]></string>
+    <string name="rating">Avaliação: %15.1f</string>
 </resources>
