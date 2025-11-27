@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activy_main)
         setContent(){
             val navegacao = rememberNavController()
 
@@ -62,34 +61,6 @@ class MainActivity : AppCompatActivity() {
             composable(route = "mapa") { Maps(navegacao) }
         }
         }
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
-        mapFragment.getMapAsync{ googleMap ->
-            googleMap.setInfoWindowAdapter(MarkerInfoAdapter(this))
-            addMarkers(googleMap)
-
-            googleMap.setOnMapLoadedCallback {
-                val bounds = LatLngBounds.builder()
-
-                places.forEach{
-                    bounds.include(it.latLng)
-                }
-
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 100))
-            }
-        }
-    }
-
-    private fun addMarkers(googleMap: GoogleMap){
-        places.forEach { place ->
-            val marker = googleMap.addMarker(
-                MarkerOptions()
-                    .title(place.name)
-                    .snippet(place.address)
-                    .position(place.latLng)
-            )
-
-            marker?.tag = place
-        }
     }
 }
 
@@ -99,24 +70,6 @@ data class Place(
     val address: String,
     val rating: Float
 )
-
-//val navegacao = rememberNavController()
-//NavHost(
-//navController = navegacao,
-//startDestination = "inicio"
-//) {
-//    composable(route = "inicio") { TelaInicial(navegacao) }
-//    composable(route = "inicio2") { TelaInicial2(navegacao) }
-//    composable(route = "login") { TelaLogin(navegacao) }
-//    composable(route = "cadastro") { TelaCadastro(navegacao) }
-//    composable(route = "home") { TelaHome(navegacao) }
-//    composable(route = "perfil") { TelaPerfil(navegacao) }
-//    composable(route = "recuperacao") { RecuperacaoSenha(navegacao) }
-//    composable(route = "codigo") { CodigoVerificacao(navegacao) }
-//    composable(route = "novaSenha") { NovaSenha(navegacao) }
-//    composable(route = "calendario") { TelaCalendario(navegacao) }
-//    composable(route = "mapa") { TelaMapa(navegacao) }
-//}
 
 
 
