@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             composable(route = "codigo") { CodigoVerificacao(navegacao) }
             composable(route = "novaSenha") { NovaSenha(navegacao) }
             composable(route = "calendario") { TelaCalendario(navegacao) }
-            composable(route = "mapa") { TelaMapa(navegacao) }
+            composable(route = "mapa") { Maps(navegacao) }
         }
         }
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment

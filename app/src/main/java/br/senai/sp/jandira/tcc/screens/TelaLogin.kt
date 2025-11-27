@@ -306,7 +306,6 @@ fun TelaLogin(navegacao: NavHostController?) {
                         onClick = {
                             if(validar()){
                                 val body = LoginUsuario(
-                                    id = null,
                                     email = emailUs,
                                     senha = senhaUs
                                 )
@@ -315,9 +314,13 @@ fun TelaLogin(navegacao: NavHostController?) {
                                         .loginUsuario(body)
                                         .await()
                                     println("Sucesso uhuuuull")
+                                    if (usuario.status_code == 200) {
                                     salvarUsuario(context, emailUs, senhaUs)
                                     withContext(Dispatchers.Main) {
                                         navegacao?.navigate("home")
+                                    }
+                                    }else{
+                                        println("Erro")
                                     }
                                 }
                             }else{

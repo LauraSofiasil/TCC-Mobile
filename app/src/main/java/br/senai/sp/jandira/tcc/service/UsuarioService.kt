@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.tcc.service
 
+import br.senai.sp.jandira.tcc.model.LoginResponse
 import br.senai.sp.jandira.tcc.model.LoginUsuario
 import br.senai.sp.jandira.tcc.model.Recuperacao
 import br.senai.sp.jandira.tcc.model.Usuario
@@ -18,7 +19,7 @@ interface UsuarioService {
     //Login
     @Headers("Content-Type: application/json")
     @POST("usuario/login") //diz para o retrofit que a função abaixo é um post
-    fun loginUsuario(@Body loginUsuario: LoginUsuario ): Call<LoginUsuario>
+    fun loginUsuario(@Body loginUsuario: LoginUsuario): Call<LoginResponse>
 
 //    //Listar dados do login
 //    @GET("usuario/login")
