@@ -61,7 +61,7 @@ fun TelaPerfil(navegacao: NavHostController?) {
     val emailSalvo = dados.getString("user_email", "") ?: ""
     val senhaSalva = dados.getString("user_password", "") ?: ""
 
-    var nomeUsuario = remember{ mutableStateOf(value = "Manuela Cardoso") }
+    var nomeUsuario = remember{ mutableStateOf(value = "Carolina Silva")}
     var emailUsuario = remember{ mutableStateOf(value = emailSalvo) }
     var senhaUsuario = remember{ mutableStateOf(value = senhaSalva) }
 
@@ -296,7 +296,8 @@ fun TelaPerfil(navegacao: NavHostController?) {
                     colors = CardDefaults.cardColors(
                         containerColor = Color(0xBA1892FF)
                     )
-                ) {
+                )
+                {
                     Row(
                         modifier = Modifier
                             .padding(top = 14.dp)

@@ -33,6 +33,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavHostController
@@ -114,7 +115,8 @@ fun Maps(navegacao: NavHostController?) {
                 colors = CardDefaults.cardColors(
                     containerColor = Color(0xff1892FF)
                 )
-            ) {
+            )
+            {
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
@@ -133,7 +135,7 @@ fun Maps(navegacao: NavHostController?) {
                 }
             }
 
-            Spacer(modifier = Modifier.width(20.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
             Column(
                 modifier = Modifier
@@ -149,6 +151,233 @@ fun Maps(navegacao: NavHostController?) {
                     fontSize = 15.sp,
                     color = Color.Black
                 )
+            }
+
+            Spacer(modifier = Modifier.height(520.dp))
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(230.dp),
+                shape = RoundedCornerShape(
+                    topStart  = 10.dp,
+                    topEnd =  10.dp
+                ),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White
+                )
+            )
+            {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(top = 10.dp, start = 10.dp)
+                )
+                {
+                    Text(
+                        text = "Sala Multissensorial Aeroporto de Congonhas",
+                        color = Color(0xff000000),
+                        fontFamily = FontFamily(Font(R.font.inter_bold)),
+                        fontSize = 15.sp,
+                    )
+                    Row(
+                        modifier = Modifier
+                            .padding(start = 2.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    )
+                    {
+                        Image(
+                        painter = painterResource(R.drawable.mappin),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(10.dp)
+                        )
+                        Text(
+                            text = "Av. Washington Luís, s/n - Campo Belo, São Paulo - SP, 04626-911",
+                            color = Color(0xff000000),
+                            fontFamily = FontFamily(Font(R.font.inter_normal)),
+                            fontSize = 12.sp,
+                        )
+
+                    }
+                    Row(
+                        modifier = Modifier
+                            .padding(start = 2.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    )
+                    {
+                        Image(
+                            painter = painterResource(R.drawable.phone),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(10.dp)
+                        )
+                        Text(
+                            text = "(11) 5090-9000",
+                            color = Color(0xff000000),
+                            fontFamily = FontFamily(Font(R.font.inter_normal)),
+                            fontSize = 12.sp,
+                        )
+                        //(11) 5090-9000
+                    }
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    Text(
+                        text = "Sala Multissensorial Terminal Santo Amaro",
+                        color = Color(0xff000000),
+                        fontFamily = FontFamily(Font(R.font.inter_bold)),
+                        fontSize = 15.sp,
+                    )
+                    Row(
+                        modifier = Modifier
+                            .padding(start = 2.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    )
+                    {
+                        Image(
+                            painter = painterResource(R.drawable.mappin),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(10.dp)
+                        )
+                        Text(
+                            text = "Santo Amaro, São Paulo - SP, 04753-060",
+                            color = Color(0xff000000),
+                            fontFamily = FontFamily(Font(R.font.inter_normal)),
+                            fontSize = 12.sp,
+                        )
+
+                    }
+                    Row(
+                        modifier = Modifier
+                            .padding(start = 2.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    )
+                    {
+                        Image(
+                            painter = painterResource(R.drawable.phone),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(10.dp)
+                        )
+                        Text(
+                            text = "(11) 5685-7071",
+                            color = Color(0xff000000),
+                            fontFamily = FontFamily(Font(R.font.inter_normal)),
+                            fontSize = 12.sp,
+                        )
+                    }
+                    //
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    Text(
+                        text = "Sala Multissensorial Estação Barra Funda",
+                        color = Color(0xff000000),
+                        fontFamily = FontFamily(Font(R.font.inter_bold)),
+                        fontSize = 15.sp,
+                    )
+                    Row(
+                        modifier = Modifier
+                            .padding(start = 2.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    )
+                    {
+                        Image(
+                            painter = painterResource(R.drawable.mappin),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(12.dp)
+                        )
+                        Text(
+                            text = "R. Dr. Bento Teobaldo Ferraz, 119 - Barra Funda, São Paulo - SP, 01140-070",
+                            color = Color(0xff000000),
+                            fontFamily = FontFamily(Font(R.font.inter_normal)),
+                            fontSize = 12.sp,
+                        )
+
+                    }
+                    Row(
+                        modifier = Modifier
+                            .padding(start = 2.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    )
+                    {
+                        Image(
+                            painter = painterResource(R.drawable.phone),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(12.dp)
+                        )
+                        Text(
+                            text = "(11) 3392-2455",
+                            color = Color(0xff000000),
+                            fontFamily = FontFamily(Font(R.font.inter_normal)),
+                            fontSize = 12.sp,
+                        )
+                    }
+                }
+
+            }
+
+            //Barra inferior
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(65.dp),
+                shape = RoundedCornerShape(
+                    topEnd = 10.dp,
+                    topStart = 10.dp
+                ),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xBA1892FF)
+                )
+            )
+            {
+                Row(
+                    modifier = Modifier
+                        .padding(top = 14.dp)
+                        .fillMaxSize(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.calendario),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable {navegacao!!.navigate("calendario")}
+                    )
+
+                    Spacer(modifier = Modifier.width(80.dp))
+
+                    Image(
+                        painter = painterResource(R.drawable.casinha),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable { navegacao!!.navigate("home") }
+                    )
+
+                    Spacer(modifier = Modifier.width(80.dp))
+
+                    Image(
+                        painter = painterResource(R.drawable.medicina),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable { navegacao!!.navigate("") }
+                    )
+                    Spacer(modifier = Modifier.width(80.dp))
+
+                    Image(
+                        painter = painterResource(R.drawable.local),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable {navegacao!!.navigate("mapa")}
+                    )
+                }
             }
 
 

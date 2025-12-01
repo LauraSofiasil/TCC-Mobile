@@ -26,7 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -36,11 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
-import br.senai.sp.jandira.tcc.model.LoginUsuario
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import retrofit2.await
+
 
 @Composable
 fun TelaHome(navegacao: NavHostController?) {
@@ -546,7 +541,7 @@ fun TelaHome(navegacao: NavHostController?) {
                                 modifier = Modifier
                                     .padding(top = 15.dp)
                             )
-                            Row(){
+                            Row{
                                 Column()
                                 {
                                     Text(
@@ -666,67 +661,67 @@ fun TelaHome(navegacao: NavHostController?) {
                     )
                 )
                 {
-//                    Row(
-//                        modifier = Modifier
-//                            .fillMaxSize(),
-//                        horizontalArrangement = Arrangement.Center,
-//                        verticalAlignment = Alignment.CenterVertically
-//                    )
-//                    {
-//                        Text(
-//                            text = "©",
-//                            color = Color(0xff8E8E8E),
-//                            fontFamily = FontFamily(Font(R.font.inter_normal)),
-//                            fontSize = 6.sp,
-//                            modifier = Modifier
-//
-//                        )
-//
-//                        Spacer(modifier = Modifier.width(6.dp))
-//
-//                        Text(
-//                            text = "2025 TeAjuda. Todos os direitos reservados.",
-//                            color = Color(0xff8E8E8E),
-//                            fontFamily = FontFamily(Font(R.font.inter_normal)),
-//                            fontSize = 5.sp,
-//                            modifier = Modifier
-//
-//                        )
-//                    }
-////                    Row(
-////                        modifier = Modifier
-////                            .padding(top = 14.dp)
-////                            .fillMaxSize(),
-////                        horizontalArrangement = Arrangement.Center
-////                    )
-////                    {
-////                        Image(
-////                            painter = painterResource(R.drawable.calendario),
-////                            contentDescription = "",
-////                            modifier = Modifier
-////                                .size(24.dp)
-////                        )
-////
-////                        Spacer(modifier = Modifier.width(80.dp))
-////
-////                        Image(
-////                            painter = painterResource(R.drawable.casinha),
-////                            contentDescription = "",
-////                            modifier = Modifier
-////                                .size(24.dp)
-////                                .clickable { navegacao!!.navigate("home") }
-////                        )
-////
-////                        Spacer(modifier = Modifier.width(80.dp))
-////
-////                        Image(
-////                            painter = painterResource(R.drawable.medicina),
-////                            contentDescription = "",
-////                            modifier = Modifier
-////                                .size(24.dp)
-////                                .clickable { navegacao!!.navigate("") }
-////                        )
-////                    }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    )
+                    {
+                        Text(
+                            text = "©",
+                            color = Color(0xff8E8E8E),
+                            fontFamily = FontFamily(Font(R.font.inter_normal)),
+                            fontSize = 6.sp,
+                            modifier = Modifier
+
+                        )
+
+                        Spacer(modifier = Modifier.width(6.dp))
+
+                        Text(
+                            text = "2025 TeAjuda. Todos os direitos reservados.",
+                            color = Color(0xff8E8E8E),
+                            fontFamily = FontFamily(Font(R.font.inter_normal)),
+                            fontSize = 5.sp,
+                            modifier = Modifier
+
+                        )
+                    }
+                    Row(
+                        modifier = Modifier
+                            .padding(top = 14.dp)
+                            .fillMaxSize(),
+                        horizontalArrangement = Arrangement.Center
+                    )
+                    {
+                        Image(
+                            painter = painterResource(R.drawable.calendario),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(24.dp)
+                        )
+
+                        Spacer(modifier = Modifier.width(80.dp))
+
+                        Image(
+                            painter = painterResource(R.drawable.casinha),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(24.dp)
+                                .clickable { navegacao!!.navigate("home") }
+                        )
+
+                        Spacer(modifier = Modifier.width(80.dp))
+
+                        Image(
+                            painter = painterResource(R.drawable.medicina),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(24.dp)
+                                .clickable { navegacao!!.navigate("") }
+                        )
+                    }
                }
             }
 

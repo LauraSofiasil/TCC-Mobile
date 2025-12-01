@@ -49,11 +49,13 @@ import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
 import br.senai.sp.jandira.tcc.model.Usuario
 import br.senai.sp.jandira.tcc.service.RetrofitFactory
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.await
 
+@OptIn(DelicateCoroutinesApi::class)
 @Composable
 fun TelaCadastro(navegacao: NavHostController?) {
 
@@ -419,7 +421,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                                 senha = senha
                             )
                             GlobalScope.launch(Dispatchers.IO) {
-                                val usuarioNovo = usuarioAPI
+                                usuarioAPI
                                     .cadastrarUsuario(usuario)
                                     .await()
                                 println("Sucesso")
@@ -477,7 +479,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                 dismissButton = {
                     TextButton(
                         onClick = {
-                            navegacao!!.navigate("inicio2")
+                            navegacao!!.navigate("login")
                         }
                     ) {
                         Text(text = "Não")
