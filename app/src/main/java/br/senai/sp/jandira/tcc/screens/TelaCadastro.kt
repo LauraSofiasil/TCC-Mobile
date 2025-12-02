@@ -380,7 +380,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Password,
-                            imeAction = ImeAction.Next
+                            imeAction = ImeAction.Done
                         ),
                         isError = isConfirmarError && isValidarSenhaError, //Estilo de erro vermelho
                         supportingText = {

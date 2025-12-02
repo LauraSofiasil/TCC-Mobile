@@ -255,7 +255,7 @@ fun TelaLogin(navegacao: NavHostController?) {
                         shape = RoundedCornerShape(12.dp),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Text,
-                            imeAction = ImeAction.Next
+                            imeAction = ImeAction.Done
                         ),
                         isError = isSenhaError, //Estilo de erro vermelho
                         supportingText = {
