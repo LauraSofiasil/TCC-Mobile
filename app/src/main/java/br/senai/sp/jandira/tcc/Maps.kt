@@ -128,8 +128,7 @@ fun Maps(navegacao: NavHostController?) {
                         painter = painterResource(R.drawable.perfilicon),
                         contentDescription = "",
                         modifier = Modifier
-                            .size(34.dp)
-                            .padding(end = 10.dp)
+                            .padding(start = 380.dp)
                             .clickable {navegacao!!.navigate("perfil")}
                     )
                 }
