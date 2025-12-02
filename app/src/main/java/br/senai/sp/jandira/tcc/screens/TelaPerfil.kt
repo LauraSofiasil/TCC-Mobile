@@ -88,6 +88,35 @@ fun TelaPerfil(navegacao: NavHostController?) {
                 .fillMaxSize()
                 .background(Color.Transparent)
         ) {
+            //Barra superior
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(65.dp),
+                shape = RoundedCornerShape(
+                    bottomEnd = 10.dp,
+                    bottomStart = 10.dp
+                ),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFF1892FF)
+                )
+            )
+            {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.perfilicon),
+                        contentDescription = "Perfil",
+                        modifier = Modifier
+                            .size(40.dp)
+                            .padding(top = 20.dp)
+                            .clickable { navegacao?.navigate("perfil")},
+                        tint = Color.Unspecified
+                    )
+                }}
             //Foto perfil
             Column(
                 modifier = Modifier
@@ -285,17 +314,17 @@ fun TelaPerfil(navegacao: NavHostController?) {
 
                 //Barra Inferior
                 Card(
-                    modifier = Modifier
-                        .padding(top = 80.dp)
-                        .fillMaxWidth()
-                        .height(65.dp),
-                    shape = RoundedCornerShape(
-                        topEnd = 10.dp,
-                        topStart = 10.dp
-                    ),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color(0xBA1892FF)
-                    )
+                        modifier = Modifier
+                            .padding(top = 20.dp)
+                            .fillMaxWidth()
+                            .height(65.dp),
+                shape = RoundedCornerShape(
+                    topEnd = 10.dp,
+                    topStart = 10.dp
+                ),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFF1892FF)
+                )
                 )
                 {
                     Row(

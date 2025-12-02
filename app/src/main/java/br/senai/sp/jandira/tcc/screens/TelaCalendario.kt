@@ -8,10 +8,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
@@ -22,218 +21,125 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.tcc.R
+import com.kizitonwose.calendar.compose.HorizontalCalendar
+import com.kizitonwose.calendar.core.daysOfWeek
+import java.time.LocalDate
+import java.time.YearMonth
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import com.kizitonwose.calendar.compose.HorizontalCalendar
+import com.kizitonwose.calendar.compose.rememberCalendarState
+import com.kizitonwose.calendar.core.*
+import java.time.DayOfWeek
+import java.time.temporal.WeekFields
+import java.util.Locale
 
 @Composable
 fun TelaCalendario(navegacao: NavHostController?) {
+    // 1. Definir o intervalo de meses
+    val currentMonth = YearMonth.now()
+    val startMonth = currentMonth.minusMonths(100)
+    val endMonth = currentMonth.plusMonths(100)
+    val firstDayOfWeek = WeekFields.of(Locale.getDefault()).firstDayOfWeek
+
+    // 2. Criar e lembrar o estado do calendário
+    val state = rememberCalendarState(
+        startMonth = startMonth,
+        endMonth = endMonth,
+        firstVisibleMonth = currentMonth,
+        firstDayOfWeek = firstDayOfWeek
+    )
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        // Exibir o nome do mês visível (o primeiro na tela)
+        val visibleMonth = state.firstVisibleMonth.yearMonth
+        Text(
+            text = "${visibleMonth.month.name} ${visibleMonth.year}",
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Exibir os dias da semana (Seg, Ter, Qua, etc.)
+        SemanaHeader(daysOfWeek = daysOfWeek())
+
+        // 3. O Composable do Calendário em si
+        HorizontalCalendar(
+            modifier = Modifier.fillMaxWidth(),
+            state = state,
+            dayContent = { day ->
+                // Este é o composable que desenha CADA dia
+                Day(day)
+            },
+            monthHeader = { month ->
+                // Opcional: Aqui você pode colocar um cabeçalho para cada mês, se necessário
+            }
+        )
+    }
+}
+
+@Composable
+fun Day(calendarDay: CalendarDay) {
+    val date = calendarDay.date
+    val isToday = date == LocalDate.now()
+    val isSelected = false // Você pode adicionar sua lógica de seleção aqui
 
     Box(
         modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
+            .aspectRatio(1f) // Torna a célula quadrada
+            .padding(2.dp)
+            .background(
+                when {
+                    isSelected -> Color.Blue // Cor de fundo para dia selecionado
+                    isToday -> Color.LightGray // Cor de fundo para o dia atual
+                    calendarDay.position == DayPosition.MonthDate -> Color.Transparent // Dias do mês
+                    else -> Color.Transparent // Dias de outros meses (in/out dates)
+                }
+            ),
+        contentAlignment = Alignment.Center
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color(0XFFADD8FF))
-        ) {}
-        Image(
-            painter = painterResource(R.drawable.icons_fundo),
-            contentDescription = "",
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
+        Text(
+            text = date.dayOfMonth.toString(),
+            color = when (calendarDay.position) {
+                DayPosition.MonthDate -> Color.Black // Dia dentro do mês
+                else -> Color.Gray // Dias "out" de outros meses
+            }
         )
+    }
+}
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.sininho),
-                    contentDescription = "",
-                    modifier = Modifier.size(28.dp)
-                )
-                Image(
-                    painter = painterResource(R.drawable.perfilicon),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(28.dp)
-                        .clickable { navegacao?.navigate("perfil") }
-                )
-            }
-
-            Spacer(modifier = Modifier.height(25.dp))
-
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(15.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White),
-                elevation = CardDefaults.cardElevation(10.dp)
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.padding(16.dp)
-                ) {
-                    Text(
-                        text = "Setembro 2025",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Medium,
-                        fontFamily = FontFamily(Font(R.font.inter_normal))
-                    )
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceAround
-                    ) {
-                        listOf("DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB").forEach {
-                            Text(it, color = Color(0xFFB0B0B0), fontSize = 12.sp)
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(12.dp))
-
-                    val dias = (1..30).toList()
-                    Column {
-                        dias.chunked(7).forEach { semana ->
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 3.dp),
-                                horizontalArrangement = Arrangement.SpaceAround
-                            ) {
-                                semana.forEach { dia ->
-                                    val isSelecionado = dia == 19
-                                    Box(
-                                        modifier = Modifier
-                                            .size(36.dp)
-                                            .clip(CircleShape)
-                                            .background(
-                                                if (isSelecionado) Color(0xFFE86C3F)
-                                                else Color.Transparent
-                                            ),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Text(
-                                            text = dia.toString(),
-                                            color = if (isSelecionado) Color.White else Color.Black,
-                                            fontSize = 14.sp,
-                                            fontFamily = FontFamily(Font(R.font.inter_normal))
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(15.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White),
-                elevation = CardDefaults.cardElevation(10.dp)
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp)
-                ) {
-                    Text(
-                        text = "19 de setembro de 2025",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily(Font(R.font.inter_normal))
-                    )
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    repeat(10) { i ->
-                        Text(
-                            text = "${9 + i}h",
-                            color = Color(0xFFB0B0B0),
-                            fontSize = 13.sp,
-                            modifier = Modifier.padding(vertical = 3.dp)
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    Button(
-                        onClick = {},
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF61A7FF)
-                        ),
-                        modifier = Modifier
-                            .align(Alignment.End)
-                            .clip(RoundedCornerShape(12.dp))
-                    ) {
-                        Text(
-                            text = "Crise",
-                            color = Color.White,
-                            fontFamily = FontFamily(Font(R.font.inter_normal))
-                        )
-                    }
-                }
-            }
-        }
-
-        Card(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth()
-                .height(70.dp),
-            shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF1892FF)),
-            elevation = CardDefaults.cardElevation(10.dp)
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 40.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.calendario),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(28.dp)
-                        .clickable { navegacao?.navigate("calendario") }
-                )
-                Image(
-                    painter = painterResource(R.drawable.casinha),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(28.dp)
-                        .clickable { navegacao?.navigate("home") }
-                )
-                Image(
-                    painter = painterResource(R.drawable.medicina),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(28.dp)
-                        .clickable { navegacao?.navigate("medicina") }
-                )
-                Image(
-                    painter = painterResource(R.drawable.local),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(28.dp)
-                        .clickable { navegacao?.navigate("mapa") }
-                )
-            }
+@Composable
+fun SemanaHeader(daysOfWeek: List<DayOfWeek>) {
+    Row(modifier = Modifier.fillMaxWidth()) {
+        for (dayOfWeek in daysOfWeek) {
+            Text(
+                modifier = Modifier.weight(1f),
+                textAlign = TextAlign.Center,
+                text = dayOfWeek.name.take(3) // Ex: MON, TUE
+            )
         }
     }
 }
+
+// Helper para obter a lista de dias da semana corretamente ordenada
+fun daysOfWeek(firstDayOfWeek: DayOfWeek = WeekFields.of(Locale.getDefault()).firstDayOfWeek): List<DayOfWeek> {
+    val days = DayOfWeek.values().toList()
+    return days.drop(days.indexOf(firstDayOfWeek)) + days.take(days.indexOf(firstDayOfWeek))
+}
+
+
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
