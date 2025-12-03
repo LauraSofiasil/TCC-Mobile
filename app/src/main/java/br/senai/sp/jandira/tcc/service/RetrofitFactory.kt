@@ -22,6 +22,10 @@ class RetrofitFactory {
         return retrofitFactory.create(RecuperacaoService::class.java)
     }
 
+    fun getRegistroService(): RegistroService{
+        return retrofitFactory.create(RegistroService::class.java)
+    }
+
     //funcao de gerar o relatorio
     fun getGerarRelatorioService(): RelatorioService {
         return retrofitFactory.create(RelatorioService::class.java)

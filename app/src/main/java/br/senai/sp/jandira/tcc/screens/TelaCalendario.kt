@@ -250,7 +250,8 @@ fun TelaCalendario(navegacao: NavHostController?) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-        ){
+        )
+        {
 
             Card(
                 modifier = Modifier
