@@ -20,7 +20,7 @@ class MarkerInfoAdapter(private val context: Context) : GoogleMap.InfoWindowAdap
 
         view.findViewById<TextView>(R.id.txt_title).text = place.name
         view.findViewById<TextView>(R.id.txt_address).text = place.address
-        view.findViewById<TextView>(R.id.txt_rating).text = context.getString(R.string.rating, place.rating)
+        view.findViewById<TextView>(R.id.txt_rating).text = place.telephone
 
         return view
     }

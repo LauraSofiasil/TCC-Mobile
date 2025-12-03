@@ -32,12 +32,6 @@ import okhttp3.Address
 
 class MainActivity : AppCompatActivity() {
 
-    private val places = arrayListOf(
-        Place("Aeroporto de São Paulo/Congonhas", LatLng(-23.6253367,-46.6623943), "Av. Washington Luís, s/n - Campo Belo, São Paulo - SP, 04626-911", 4.8f),
-        Place("Terminal Santo Amaro", LatLng(-23.6543091,-46.7148871), "Santo Amaro, São Paulo - SP, 04753-060", 4.8f),
-        Place("Estação Barra Funda", LatLng(-23.52565,-46.6714554), "R. Dr. Bento Teobaldo Ferraz, 119 - Barra Funda, São Paulo - SP, 01140-070", 4.8f)
-    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent(){
@@ -67,7 +61,7 @@ data class Place(
     val name: String,
     val latLng: LatLng,
     val address: String,
-    val rating: Float
+    val telephone: String
 )
 
 

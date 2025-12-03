@@ -162,7 +162,7 @@ fun TelaHome(navegacao: NavHostController?) {
                     //Card mapa
                     Card(
                         modifier = Modifier
-                            .width(350.dp)
+                            .width(360.dp)
                             .height(110.dp)
                             .clickable {navegacao!!.navigate("mapa")},
                         shape = RoundedCornerShape(
@@ -208,7 +208,7 @@ fun TelaHome(navegacao: NavHostController?) {
                             Spacer(modifier = Modifier.width(26.dp))
 
                             Image(
-                                painter = painterResource(R.drawable.iconmap),
+                                painter = painterResource(R.drawable.iconmap2),
                                 contentDescription = "",
                                 modifier = Modifier
                                     .size(90.dp)
@@ -216,12 +216,12 @@ fun TelaHome(navegacao: NavHostController?) {
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(27.dp))
+                    Spacer(modifier = Modifier.height(37.dp))
 
                     //Card registros
                     Card(
                         modifier = Modifier
-                            .width(350.dp)
+                            .width(360.dp)
                             .height(110.dp)
                             .clickable {navegacao!!.navigate("registro")},
                         shape = RoundedCornerShape(
@@ -267,7 +267,7 @@ fun TelaHome(navegacao: NavHostController?) {
                             Spacer(modifier = Modifier.width(66.dp))
 
                             Image(
-                                painter = painterResource(R.drawable.iconregistro),
+                                painter = painterResource(R.drawable.iconregistro2),
                                 contentDescription = "",
                                 modifier = Modifier
                                     .size(90.dp)
@@ -275,12 +275,12 @@ fun TelaHome(navegacao: NavHostController?) {
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(27.dp))
+                    Spacer(modifier = Modifier.height(37.dp))
 
                     //Card calendario
                     Card(
                         modifier = Modifier
-                            .width(350.dp)
+                            .width(360.dp)
                             .height(110.dp)
                             .clickable {navegacao!!.navigate("calendario")},
                         shape = RoundedCornerShape(
@@ -326,7 +326,7 @@ fun TelaHome(navegacao: NavHostController?) {
                             Spacer(modifier = Modifier.width(50.dp))
 
                             Image(
-                                painter = painterResource(R.drawable.iconcalendar),
+                                painter = painterResource(R.drawable.iconcalendar2),
                                 contentDescription = "",
                                 modifier = Modifier
                                     .size(90.dp)
@@ -341,6 +341,7 @@ fun TelaHome(navegacao: NavHostController?) {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(top = 70.dp)
                     .height(65.dp),
                 shape = RoundedCornerShape(
                     topEnd = 10.dp,

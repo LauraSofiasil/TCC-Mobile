@@ -60,20 +60,33 @@ fun Maps(navegacao: NavHostController?) {
                                 "Aeroporto de São Paulo/Congonhas",
                                 LatLng(-23.6253367, -46.6623943),
                                 "Av. Washington Luís, s/n - Campo Belo, São Paulo - SP, 04626-911",
-                                4.8f
+                                "(11) 5090-9000"
                             ),
                             Place(
                                 "Terminal Santo Amaro",
                                 LatLng(-23.6543091, -46.7148871),
                                 "Santo Amaro, São Paulo - SP, 04753-060",
-                                4.8f
+                                "(11) 5685-7071"
                             ),
+                            //
                             Place(
                                 "Estação Barra Funda",
                                 LatLng(-23.52565, -46.6714554),
                                 "R. Dr. Bento Teobaldo Ferraz, 119 - Barra Funda, São Paulo - SP, 01140-070",
-                                4.8f
-                            )
+                                "(11) 3392-2455"
+                            ),
+                            Place(
+                                "Estação Tatuapé",
+                                LatLng(-23.5402778,-46.5812951),
+                                "R. Melo Freire - Tatuapé, São Paulo - SP, 03307-005",
+                                "08007707722"
+                            ),//
+                            Place(
+                                "Boulevard Shopping Bauru",
+                                LatLng(-22.3164844,-49.0853087),
+                                "R. Marcondes Salgado, Quadra 11 - Chácara das Flores, Bauru - SP, 17013-113",
+                                "(14) 3500-8951"
+                            ),
                         )
 
                         googleMap.setInfoWindowAdapter(MarkerInfoAdapter(context))
@@ -330,7 +343,7 @@ fun Maps(navegacao: NavHostController?) {
                     topStart = 10.dp
                 ),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xBA1892FF)
+                    containerColor = Color(0xFF1892FF)
                 )
             )
             {
