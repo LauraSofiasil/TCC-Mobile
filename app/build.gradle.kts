@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "br.senai.sp.jandira.tcc"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "br.senai.sp.jandira.tcc"

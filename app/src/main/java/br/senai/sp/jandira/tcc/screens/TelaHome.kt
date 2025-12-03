@@ -154,7 +154,7 @@ fun TelaHome(navegacao: NavHostController?) {
                         fontFamily = FontFamily(Font(R.font.inter_bold)),
                         color = Color.Black,
                         modifier = Modifier
-                            .padding(top = 30.dp) //
+                            .padding(top = 20.dp) //
                     )
 
                     Spacer(modifier = Modifier.height(36.dp))
@@ -208,7 +208,7 @@ fun TelaHome(navegacao: NavHostController?) {
                             Spacer(modifier = Modifier.width(26.dp))
 
                             Image(
-                                painter = painterResource(R.drawable.iconmap2),
+                                painter = painterResource(R.drawable.teteiconmap),
                                 contentDescription = "",
                                 modifier = Modifier
                                     .size(90.dp)
@@ -216,7 +216,7 @@ fun TelaHome(navegacao: NavHostController?) {
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(37.dp))
+                    Spacer(modifier = Modifier.height(27.dp))
 
                     //Card registros
                     Card(
@@ -275,7 +275,7 @@ fun TelaHome(navegacao: NavHostController?) {
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(37.dp))
+                    Spacer(modifier = Modifier.height(27.dp))
 
                     //Card calendario
                     Card(
@@ -341,14 +341,14 @@ fun TelaHome(navegacao: NavHostController?) {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 70.dp)
+                    .padding(top = 5.dp)
                     .height(65.dp),
                 shape = RoundedCornerShape(
                     topEnd = 10.dp,
                     topStart = 10.dp
                 ),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFF1892FF)
+                    containerColor = Color(0xFF35A1FF)
                 )
             )
             {

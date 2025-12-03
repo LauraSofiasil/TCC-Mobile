@@ -283,7 +283,7 @@ fun TelaCalendario(navegacao: NavHostController?) {
                 }
             }
 
-            Spacer(modifier = Modifier.height(800.dp))
+            Spacer(modifier = Modifier.height(730.dp))
 
             //Barra inferior
             Card(

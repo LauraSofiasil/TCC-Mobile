@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.tcc.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,6 +27,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.rememberCoroutineScope
+import retrofit2.Response
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -51,7 +54,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.OutlinedTextFieldDefaults
-
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalContext
+import br.senai.sp.jandira.tcc.model.Registro
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -60,8 +67,6 @@ fun TelaRegistro(navegacao: NavHostController?) {
     var texto by remember { mutableStateOf("") }
     var data by remember { mutableStateOf("") }
 
-    //Criar uma estância da conexão com a API
-    val registroAPI = RetrofitFactory().getRegistroService()
 
     Box(
         modifier = Modifier
