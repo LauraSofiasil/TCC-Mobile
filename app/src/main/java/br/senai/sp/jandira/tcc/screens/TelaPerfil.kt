@@ -101,22 +101,8 @@ fun TelaPerfil(navegacao: NavHostController?) {
                     containerColor = Color(0xFF84C0FF) //0XFFADD8FF
                 )
             )
-            {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.perfilicon),
-                        contentDescription = "Perfil",
-                        modifier = Modifier
-                            .size(40.dp)
-                            .padding(top = 20.dp)
-                            .clickable { navegacao?.navigate("perfil")},
-                        tint = Color.Unspecified
-                    )
-                }}
+            {}
+
             //Foto perfil
             Column(
                 modifier = Modifier

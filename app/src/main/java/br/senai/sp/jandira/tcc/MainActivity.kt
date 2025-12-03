@@ -21,7 +21,6 @@ import br.senai.sp.jandira.tcc.screens.TelaLogin
 import br.senai.sp.jandira.tcc.screens.TelaPerfil
 import br.senai.sp.jandira.tcc.screens.RecuperacaoSenha
 import br.senai.sp.jandira.tcc.screens.TelaCalendario
-import br.senai.sp.jandira.tcc.screens.TelaMapa
 import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
