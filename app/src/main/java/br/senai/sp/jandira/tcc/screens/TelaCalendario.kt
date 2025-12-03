@@ -40,6 +40,8 @@ import com.kizitonwose.calendar.core.*
 import java.time.DayOfWeek
 import java.time.temporal.WeekFields
 import java.util.Locale
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
 @Composable
 fun TelaCalendario(navegacao: NavHostController?) {
@@ -49,13 +51,15 @@ fun TelaCalendario(navegacao: NavHostController?) {
     val endMonth = currentMonth.plusMonths(100)
     val firstDayOfWeek = WeekFields.of(Locale.getDefault()).firstDayOfWeek
 
-    // 2. Criar e lembrar o estado do calendário
+    //Criar e lembrar o estado do calendário
     val state = rememberCalendarState(
         startMonth = startMonth,
         endMonth = endMonth,
         firstVisibleMonth = currentMonth,
         firstDayOfWeek = firstDayOfWeek
     )
+
+    var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
 
     Column(
         modifier = Modifier
@@ -80,32 +84,50 @@ fun TelaCalendario(navegacao: NavHostController?) {
             modifier = Modifier.fillMaxWidth(),
             state = state,
             dayContent = { day ->
-                // Este é o composable que desenha CADA dia
-                Day(day)
+                // Mude a chamada para passar o estado e a função de clique
+                Day(
+                    calendarDay = day,
+                    isSelected = selectedDate == day.date, // Verifica se este dia é o selecionado
+                    onDayClick = { date ->
+                        selectedDate = if (selectedDate == date) null else date
+                    }
+                )
             },
             monthHeader = { month ->
-                // Opcional: Aqui você pode colocar um cabeçalho para cada mês, se necessário
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.Magenta)
+                ) {  }
             }
         )
     }
 }
 
 @Composable
-fun Day(calendarDay: CalendarDay) {
+fun Day(
+    calendarDay: CalendarDay,
+    isSelected: Boolean, //Recebe o estado de seleção
+    onDayClick: (LocalDate) -> Unit
+) {
     val date = calendarDay.date
     val isToday = date == LocalDate.now()
-    val isSelected = false // Você pode adicionar sua lógica de seleção aqui
+
+    val isClickable = calendarDay.position == DayPosition.MonthDate
+
 
     Box(
         modifier = Modifier
-            .aspectRatio(1f) // Torna a célula quadrada
+            .aspectRatio(1f)
             .padding(2.dp)
+            .clickable(enabled = isClickable) {
+                onDayClick(date)
+            }
             .background(
                 when {
-                    isSelected -> Color.Blue // Cor de fundo para dia selecionado
-                    isToday -> Color.LightGray // Cor de fundo para o dia atual
-                    calendarDay.position == DayPosition.MonthDate -> Color.Transparent // Dias do mês
-                    else -> Color.Transparent // Dias de outros meses (in/out dates)
+                    isSelected -> Color(0xFF1892FF) //Cor para a data selecionada
+                    isToday -> Color.LightGray
+                    else -> Color.Transparent
                 }
             ),
         contentAlignment = Alignment.Center

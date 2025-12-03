@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitFactory {
 
-    private val baseURL = "http://10.107.134.6:8080/v1/teajuda/"
+    private val baseURL = "http://192.168.15.16:8080/v1/teajuda/"
 
     private val retrofitFactory = Retrofit
         .Builder()

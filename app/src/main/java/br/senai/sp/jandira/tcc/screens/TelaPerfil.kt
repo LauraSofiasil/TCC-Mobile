@@ -98,7 +98,7 @@ fun TelaPerfil(navegacao: NavHostController?) {
                     bottomStart = 10.dp
                 ),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFF1892FF)
+                    containerColor = Color(0xFF84C0FF) //0XFFADD8FF
                 )
             )
             {
@@ -323,7 +323,7 @@ fun TelaPerfil(navegacao: NavHostController?) {
                     topStart = 10.dp
                 ),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFF1892FF)
+                    containerColor = Color(0xFF84C0FF)
                 )
                 )
                 {

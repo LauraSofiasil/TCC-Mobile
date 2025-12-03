@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -18,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -31,139 +33,142 @@ fun TelaHome(navegacao: NavHostController?) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.linearGradient(
-                    colors = listOf(
-                        Color(0xFF60A5FA),
-                        Color(0xFF5EEAD4)
-                    ),
-                    start = Offset(0f, 0f),
-                    end = Offset(800f, 1400f)
-                )
-            )
+            .background(Color.White)
     ) {
-
-        //Barra superior
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(65.dp),
-            shape = RoundedCornerShape(
-                bottomEnd = 10.dp,
-                bottomStart = 10.dp
-            ),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFF1892FF)
-            )
-        )
-        {
-            Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 25.dp),
-            horizontalArrangement = Arrangement.End
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.perfilicon),
-                contentDescription = "Perfil",
-                modifier = Modifier
-                    .size(40.dp)
-                    .clickable { navegacao?.navigate("perfil")},
-                tint = Color.Unspecified
-            )
-        }}
-
-
-        // 🔵 CONTEÚDO CENTRAL
+        //Meio
         Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-
-            Image(
-                painter = painterResource(id = R.drawable.logo2),
-                contentDescription = "Logo",
-                modifier = Modifier
-                    .size(160.dp)
-                    .clip(CircleShape)
-                    .background(Color.White)
-                    .padding(20.dp)
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Text(
-                text = "BEM-VINDO AO",
-                fontSize = 26.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
-            )
-            Text(
-                text = "TEAJUDA",
-                fontSize = 26.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
-            )
-        }
-
-        //Barra Inferior
-        Card(
-            modifier = Modifier
-                .padding(top = 850.dp)
-                .fillMaxWidth()
-                .height(65.dp),
-            shape = RoundedCornerShape(
-                topEnd = 10.dp,
-                topStart = 10.dp
-            ),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFF1892FF)
-            )
+            modifier = Modifier.fillMaxWidth()
+                .height(250.dp)
+                .background(
+                    Brush.linearGradient(
+                        colors = listOf(
+                            Color(0xFF60A5FA),
+                            Color(0xFF5EEAD4)
+                        ),
+                        start = Offset(0f, 0f),
+                        end = Offset(300f, 900f)
+                    )
+                )
         )
         {
             Row(
                 modifier = Modifier
-                    .padding(top = 14.dp)
-                    .fillMaxSize(),
-                horizontalArrangement = Arrangement.Center
+                    .fillMaxWidth()
+                    .padding(top = 70.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = painterResource(R.drawable.calendario),
-                    contentDescription = "",
+                    painter = painterResource(id = R.drawable.logo2),
+                    contentDescription = "Logo",
                     modifier = Modifier
-                        .size(24.dp)
-                        .clickable {navegacao!!.navigate("calendario")}
+                        .size(120.dp)
+                        .padding(start = 30.dp)
                 )
 
-                Spacer(modifier = Modifier.width(80.dp))
+                Spacer(modifier = Modifier.width(20.dp))
 
-                Image(
-                    painter = painterResource(R.drawable.casinha),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(24.dp)
-                        .clickable { navegacao!!.navigate("home") }
+                Text(
+                    text = "TEAJUDA",
+                    fontSize = 35.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
                 )
+            }
+        }
 
-                Spacer(modifier = Modifier.width(80.dp))
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
 
-                Image(
-                    painter = painterResource(R.drawable.medicina),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(24.dp)
-                        .clickable { navegacao!!.navigate("") }
+            //Barra superior
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(65.dp),
+                shape = RoundedCornerShape(
+                    bottomEnd = 10.dp,
+                    bottomStart = 10.dp
+                ),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFF79BCFF)
                 )
-                Spacer(modifier = Modifier.width(80.dp))
-
-                Image(
-                    painter = painterResource(R.drawable.local),
-                    contentDescription = "",
+            )
+            {
+                Row(
                     modifier = Modifier
-                        .size(24.dp)
-                        .clickable {navegacao!!.navigate("mapa")}
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp, vertical = 25.dp),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.perfilicon),
+                        contentDescription = "Perfil",
+                        modifier = Modifier
+                            .size(40.dp)
+                            .clickable { navegacao?.navigate("perfil")},
+                        tint = Color.Unspecified
+                    )
+                }}
+
+
+            //Barra Inferior
+            Card(
+                modifier = Modifier
+                    .padding(top = 850.dp)
+                    .fillMaxWidth()
+                    .height(65.dp),
+                shape = RoundedCornerShape(
+                    topEnd = 10.dp,
+                    topStart = 10.dp
+                ),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFF1892FF)
                 )
+            )
+            {
+                Row(
+                    modifier = Modifier
+                        .padding(top = 14.dp)
+                        .fillMaxSize(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.calendario),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable {navegacao!!.navigate("calendario")}
+                    )
+
+                    Spacer(modifier = Modifier.width(80.dp))
+
+                    Image(
+                        painter = painterResource(R.drawable.casinha),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable { navegacao!!.navigate("home") }
+                    )
+
+                    Spacer(modifier = Modifier.width(80.dp))
+
+                    Image(
+                        painter = painterResource(R.drawable.medicina),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable { navegacao!!.navigate("") }
+                    )
+                    Spacer(modifier = Modifier.width(80.dp))
+
+                    Image(
+                        painter = painterResource(R.drawable.local),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable {navegacao!!.navigate("mapa")}
+                    )
+                }
             }
         }
     }
