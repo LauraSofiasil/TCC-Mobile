@@ -45,7 +45,7 @@ import androidx.compose.runtime.setValue
 
 @Composable
 fun TelaCalendario(navegacao: NavHostController?) {
-    // 1. Definir o intervalo de meses
+
     val currentMonth = YearMonth.now()
     val startMonth = currentMonth.minusMonths(100)
     val endMonth = currentMonth.plusMonths(100)
@@ -60,6 +60,8 @@ fun TelaCalendario(navegacao: NavHostController?) {
     )
 
     var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
+
+    var eventos by remember { mutableStateOf(eventosPorData.toMutableMap()) }
 
     Column(
         modifier = Modifier
@@ -84,13 +86,16 @@ fun TelaCalendario(navegacao: NavHostController?) {
             modifier = Modifier.fillMaxWidth(),
             state = state,
             dayContent = { day ->
-                // Mude a chamada para passar o estado e a função de clique
+
+                val dayEvents = eventos[day.date].orEmpty()
+
                 Day(
                     calendarDay = day,
                     isSelected = selectedDate == day.date, // Verifica se este dia é o selecionado
                     onDayClick = { date ->
                         selectedDate = if (selectedDate == date) null else date
-                    }
+                    },
+                    events = dayEvents
                 )
             },
             monthHeader = { month ->
@@ -108,12 +113,14 @@ fun TelaCalendario(navegacao: NavHostController?) {
 fun Day(
     calendarDay: CalendarDay,
     isSelected: Boolean, //Recebe o estado de seleção
-    onDayClick: (LocalDate) -> Unit
+    onDayClick: (LocalDate) -> Unit,
+    events: List<Events> = emptyList()
 ) {
     val date = calendarDay.date
     val isToday = date == LocalDate.now()
 
     val isClickable = calendarDay.position == DayPosition.MonthDate
+
 
 
     Box(
@@ -139,6 +146,25 @@ fun Day(
                 else -> Color.Gray // Dias "out" de outros meses
             }
         )
+        if (events.isNotEmpty()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 4.dp), // Empurra o Dot para baixo
+                contentAlignment = Alignment.BottomCenter
+            ) {
+                // Se houver mais de um evento, você pode mostrar um ponto de uma cor genérica,
+                // ou desenhar múltiplos pontos, ou usar a cor do primeiro evento.
+                Box(
+                    modifier = Modifier
+                        .size(6.dp) // Tamanho do ponto
+                        .background(
+                            color = events.first().cor, // Usa a cor do primeiro evento
+                            shape = CircleShape // Formato de círculo
+                        )
+                )
+            }
+        }
     }
 }
 
@@ -160,6 +186,21 @@ fun daysOfWeek(firstDayOfWeek: DayOfWeek = WeekFields.of(Locale.getDefault()).fi
     val days = DayOfWeek.values().toList()
     return days.drop(days.indexOf(firstDayOfWeek)) + days.take(days.indexOf(firstDayOfWeek))
 }
+
+data class Events(
+    val id: Int, val titulo: String, val cor: Color
+)
+
+// O mapa armazena eventos. Por exemplo:
+val eventosPorData = mapOf(
+    LocalDate.now().plusDays(2) to listOf(
+        Events(1, "Consulta Médica", Color.Red)
+    ),
+    LocalDate.now().plusDays(5) to listOf(
+        Events(2, "Aniversário", Color.Blue),
+        Events(3, "Reunião TCC", Color.Blue)
+    )
+)
 
 
 

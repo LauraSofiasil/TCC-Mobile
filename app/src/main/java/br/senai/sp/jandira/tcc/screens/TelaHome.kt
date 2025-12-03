@@ -35,7 +35,7 @@ fun TelaHome(navegacao: NavHostController?) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Magenta)
+            .background(Color.White)
     ) {
         //Meio
         Column(
