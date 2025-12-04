@@ -165,7 +165,7 @@ fun Maps(navegacao: NavHostController?) {
                 )
             }
 
-            Spacer(modifier = Modifier.height(520.dp))
+            Spacer(modifier = Modifier.height(443.dp))
 
             Card(
                 modifier = Modifier
@@ -199,10 +199,10 @@ fun Maps(navegacao: NavHostController?) {
                     )
                     {
                         Image(
-                        painter = painterResource(R.drawable.mappin),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .size(10.dp)
+                            painter = painterResource(R.drawable.mappin),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(10.dp)
                         )
                         Text(
                             text = "Av. Washington Luís, s/n - Campo Belo, São Paulo - SP, 04626-911",

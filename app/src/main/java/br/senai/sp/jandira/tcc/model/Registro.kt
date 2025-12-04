@@ -1,9 +1,11 @@
 package br.senai.sp.jandira.tcc.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Registro(
     val id: Int? = null,
     val texto: String,
-    val data: String
+    @SerializedName("usuario_id") var usuario_id: Int
 )
 
 data class RegistroResponse(

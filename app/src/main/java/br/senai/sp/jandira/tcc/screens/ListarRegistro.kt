@@ -101,6 +101,7 @@ fun ListarRegistro(navegacao: NavHostController?) {
             .background(Color(0xFFDDE7F0))
             .padding(top = 70.dp, bottom = 65.dp) // Adiciona padding para as barras
     ) {
+
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -112,6 +113,7 @@ fun ListarRegistro(navegacao: NavHostController?) {
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 20.dp)
             )
+
 
             // 3. Exibição da Lista com Tratamento de Estado
             when {
@@ -140,7 +142,7 @@ fun ListarRegistro(navegacao: NavHostController?) {
                     }
                 }
             }
-            Column(
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(end = 10.dp),
@@ -150,7 +152,7 @@ fun ListarRegistro(navegacao: NavHostController?) {
                     shape = RoundedCornerShape(100.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1892FF)),
                     modifier = Modifier
-                        .padding(top = 30.dp, start = 340.dp)
+                        .padding(top = 0.dp, start = 340.dp)
                 ) {
                     Text("+")
                 }
@@ -191,13 +193,6 @@ fun CardRegistro(registro: Registro) {
                     text = registro.texto,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                // Exibe a data (que já vem formatada do seu Model Node.js)
-                Text(
-                    text = "Data: ${registro.data}",
-                    fontSize = 12.sp,
-                    color = Color.Gray
                 )
             }
         }

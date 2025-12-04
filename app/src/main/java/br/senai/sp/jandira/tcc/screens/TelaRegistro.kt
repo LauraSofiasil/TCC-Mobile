@@ -68,13 +68,13 @@ import retrofit2.await
 fun TelaRegistro(navegacao: NavHostController?) {
 
     var texto by remember { mutableStateOf("") }
-    var data by remember { mutableStateOf("") }
+    var usuario_id by remember { mutableStateOf("") }
     var isTextoError by remember { mutableStateOf(false) }
     var isDataError by remember { mutableStateOf(false) }
 
     fun validar(): Boolean{
         isTextoError = texto.length <3
-        isDataError = data.length < 3
+        isDataError = usuario_id.length < 3
         return !isTextoError && !isDataError
     }
 
@@ -150,8 +150,8 @@ fun TelaRegistro(navegacao: NavHostController?) {
                 horizontalAlignment = Alignment.End
             ) {
                 OutlinedTextField(
-                    value = data,
-                    onValueChange = { data = it },
+                    value = usuario_id,
+                    onValueChange = { usuario_id = it },
                     label = { Text("AAAA-MM-DD", fontSize = 10.sp) },
                     modifier = Modifier.width(125.dp).height(40.dp).padding(end = 15.dp),
                     colors = OutlinedTextFieldDefaults.colors(
@@ -176,30 +176,33 @@ fun TelaRegistro(navegacao: NavHostController?) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
+                fun getUserId(context: Context): Int {
+                    // Ajuste o nome do arquivo se o seu ID de usuário estiver salvo em outro lugar
+                    val dadosLogin = context.getSharedPreferences("user_data", Context.MODE_PRIVATE)
+                    // Assumindo que o ID está salvo como Int com a chave "id_usuario"
+                    // Retorna 0 como valor padrão se não encontrar
+                    return dadosLogin.getInt("id_usuario", 0)
+                }
+
                 Button(
                     onClick = {
-                        if(validar()){
-                            val body = Registro(
-                                texto = texto,
-                                data = data
-                            )
-                            GlobalScope.launch(Dispatchers.IO) {
-                                val registro = registroAPI
-                                    .cadastrarRegistro(body)
-                                    .await()
-                                println("Sucesso uhuuuull")
-                                if (registro.status_code == 201) {
-                                    salvarRegistro(context, texto, data)
-                                    withContext(Dispatchers.Main) {
-                                        navegacao?.navigate("listaRegistro")
-                                    }
-                                }else{
-                                    println("Erro")
-                                }
-                            }
-                        }else{
-                            println("Deu ERRADOOO")
+                        // 1. Recuperar o ID do usuário logado (ASSUMINDO QUE ESTEJA SALVO!)
+                        val dadosLogin = context.getSharedPreferences("user_data", Context.MODE_PRIVATE)
+                        val idUsuario = dadosLogin.getInt("id_usuario", 0) // Altere "user_data" e "id_usuario" se as chaves forem diferentes
+
+                        if (idUsuario == 0) {
+                            println("ERRO: ID do usuário não encontrado nas SharedPreferences.")
+                            // Mostrar mensagem ao usuário (opcional)
+                            return@Button // Sai da função onClick
                         }
+
+
+                        val body = Registro(
+                            texto = texto,
+                            usuario_id = idUsuario // Adicionando o ID do usuário
+                        )
+
+                        navegacao?.navigate("listaRegistro")
                     },
                     modifier = Modifier
                         .width(110.dp).padding(end = 15.dp),
