@@ -131,9 +131,9 @@ fun TelaPerfil(navegacao: NavHostController?) {
                 //Campos
                 Card(
                     modifier = Modifier
-                        .padding(top = 40.dp)
+                        .padding(top = 20.dp)
                         .width(300.dp)
-                        .height(499.dp),
+                        .height(459.dp),
                     shape = RoundedCornerShape(
                         topEnd = 10.dp,
                         topStart = 10.dp,
@@ -301,7 +301,7 @@ fun TelaPerfil(navegacao: NavHostController?) {
                 //Barra Inferior
                 Card(
                         modifier = Modifier
-                            .padding(top = 20.dp)
+                            .padding(top = 10.dp)
                             .fillMaxWidth()
                             .height(65.dp),
                 shape = RoundedCornerShape(
@@ -315,7 +315,7 @@ fun TelaPerfil(navegacao: NavHostController?) {
                 {
                     Row(
                         modifier = Modifier
-                            .padding(top = 14.dp)
+                            .padding(top = 17.dp)
                             .fillMaxSize(),
                         horizontalArrangement = Arrangement.Center
                     ) {
@@ -344,7 +344,7 @@ fun TelaPerfil(navegacao: NavHostController?) {
                             contentDescription = "",
                             modifier = Modifier
                                 .size(24.dp)
-                                .clickable { navegacao!!.navigate("") }
+                                .clickable { navegacao!!.navigate("listaRegistro") }
                         )
                         Spacer(modifier = Modifier.width(80.dp))
 

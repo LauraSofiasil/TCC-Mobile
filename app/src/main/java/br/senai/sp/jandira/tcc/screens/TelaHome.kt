@@ -208,7 +208,7 @@ fun TelaHome(navegacao: NavHostController?) {
                             Spacer(modifier = Modifier.width(26.dp))
 
                             Image(
-                                painter = painterResource(R.drawable.iconmap2),
+                                painter = painterResource(R.drawable.maistestee),
                                 contentDescription = "",
                                 modifier = Modifier
                                     .size(90.dp)
@@ -216,7 +216,7 @@ fun TelaHome(navegacao: NavHostController?) {
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(37.dp))
+                    Spacer(modifier = Modifier.height(27.dp))
 
                     //Card registros
                     Card(
@@ -267,7 +267,7 @@ fun TelaHome(navegacao: NavHostController?) {
                             Spacer(modifier = Modifier.width(66.dp))
 
                             Image(
-                                painter = painterResource(R.drawable.iconregistro2),
+                                painter = painterResource(R.drawable.iconregistro3),
                                 contentDescription = "",
                                 modifier = Modifier
                                     .size(90.dp)
@@ -275,7 +275,7 @@ fun TelaHome(navegacao: NavHostController?) {
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(37.dp))
+                    Spacer(modifier = Modifier.height(27.dp))
 
                     //Card calendario
                     Card(
@@ -326,7 +326,7 @@ fun TelaHome(navegacao: NavHostController?) {
                             Spacer(modifier = Modifier.width(50.dp))
 
                             Image(
-                                painter = painterResource(R.drawable.iconcalendar2),
+                                painter = painterResource(R.drawable.iconcalendar3),
                                 contentDescription = "",
                                 modifier = Modifier
                                     .size(90.dp)
@@ -341,7 +341,7 @@ fun TelaHome(navegacao: NavHostController?) {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 70.dp)
+                    .padding(top = 5.dp)
                     .height(65.dp),
                 shape = RoundedCornerShape(
                     topEnd = 10.dp,
@@ -383,7 +383,7 @@ fun TelaHome(navegacao: NavHostController?) {
                         contentDescription = "",
                         modifier = Modifier
                             .size(24.dp)
-                            .clickable { navegacao!!.navigate("") }
+                            .clickable { navegacao!!.navigate("listaRegistro") }
                     )
                     Spacer(modifier = Modifier.width(80.dp))
 

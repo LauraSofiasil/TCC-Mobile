@@ -262,7 +262,7 @@ fun TelaCalendario(navegacao: NavHostController?) {
                     bottomEnd = 10.dp
                 ),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xff1892FF)
+                    containerColor = Color(0xFF84C0FF)
                 )
             )
             {
@@ -283,7 +283,7 @@ fun TelaCalendario(navegacao: NavHostController?) {
                 }
             }
 
-            Spacer(modifier = Modifier.height(800.dp))
+            Spacer(modifier = Modifier.height(730.dp))
 
             //Barra inferior
             Card(
@@ -295,7 +295,7 @@ fun TelaCalendario(navegacao: NavHostController?) {
                     topStart = 10.dp
                 ),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFF1892FF)
+                    containerColor = Color(0xFF84C0FF)
                 )
             )
             {
@@ -330,7 +330,7 @@ fun TelaCalendario(navegacao: NavHostController?) {
                         contentDescription = "",
                         modifier = Modifier
                             .size(24.dp)
-                            .clickable { navegacao!!.navigate("") }
+                            .clickable { navegacao!!.navigate("listaRegistro") }
                     )
                     Spacer(modifier = Modifier.width(80.dp))
 

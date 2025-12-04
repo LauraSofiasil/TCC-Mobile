@@ -146,7 +146,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
             //Conteúdo
             Column(
                 modifier = Modifier
-                    .padding(top = 60.dp)
+                    .padding(top = 50.dp)
                     .fillMaxWidth()
                     .background(Color.Transparent),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -407,7 +407,7 @@ fun TelaCadastro(navegacao: NavHostController?) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 100.dp)
+                    .padding(top = 40.dp)
                     .background(Color.Transparent),
                 horizontalAlignment = Alignment.End
             ) {

@@ -126,7 +126,7 @@ fun Maps(navegacao: NavHostController?) {
                     bottomEnd = 10.dp
                 ),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xff1892FF)
+                    containerColor = Color(0xFF84C0FF)
                 )
             )
             {
@@ -343,7 +343,7 @@ fun Maps(navegacao: NavHostController?) {
                     topStart = 10.dp
                 ),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFF1892FF)
+                    containerColor = Color(0xFF84C0FF)
                 )
             )
             {
@@ -378,7 +378,7 @@ fun Maps(navegacao: NavHostController?) {
                         contentDescription = "",
                         modifier = Modifier
                             .size(24.dp)
-                            .clickable { navegacao!!.navigate("") }
+                            .clickable { navegacao!!.navigate("listaRegistro") }
                     )
                     Spacer(modifier = Modifier.width(80.dp))
 
@@ -395,7 +395,6 @@ fun Maps(navegacao: NavHostController?) {
 
         }
     }
-    //rafinha@gmail.com
 }
 
 @Preview

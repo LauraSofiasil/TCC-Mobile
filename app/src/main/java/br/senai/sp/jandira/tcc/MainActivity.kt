@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.senai.sp.jandira.tcc.screens.CodigoVerificacao
+import br.senai.sp.jandira.tcc.screens.ListarRegistro
 import br.senai.sp.jandira.tcc.screens.NovaSenha
 import br.senai.sp.jandira.tcc.screens.TelaCadastro
 import br.senai.sp.jandira.tcc.screens.TelaHome
@@ -21,6 +22,7 @@ import br.senai.sp.jandira.tcc.screens.TelaLogin
 import br.senai.sp.jandira.tcc.screens.TelaPerfil
 import br.senai.sp.jandira.tcc.screens.RecuperacaoSenha
 import br.senai.sp.jandira.tcc.screens.TelaCalendario
+import br.senai.sp.jandira.tcc.screens.TelaRegistro
 import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -52,6 +54,8 @@ class MainActivity : AppCompatActivity() {
             composable(route = "novaSenha") { NovaSenha(navegacao) }
             composable(route = "calendario") { TelaCalendario(navegacao) }
             composable(route = "mapa") { Maps(navegacao) }
+            composable(route = "registro") { TelaRegistro(navegacao) }
+            composable(route = "listaRegistro") { ListarRegistro(navegacao) }
         }
         }
     }

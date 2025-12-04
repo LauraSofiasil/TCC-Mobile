@@ -1,5 +1,7 @@
 package br.senai.sp.jandira.tcc.screens
 
+import android.content.Context
+import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,6 +21,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -51,7 +54,14 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.OutlinedTextFieldDefaults
-
+import androidx.compose.ui.platform.LocalContext
+import br.senai.sp.jandira.tcc.model.LoginUsuario
+import br.senai.sp.jandira.tcc.model.Registro
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.await
 
 
 @Composable
@@ -59,6 +69,27 @@ fun TelaRegistro(navegacao: NavHostController?) {
 
     var texto by remember { mutableStateOf("") }
     var data by remember { mutableStateOf("") }
+    var isTextoError by remember { mutableStateOf(false) }
+    var isDataError by remember { mutableStateOf(false) }
+
+    fun validar(): Boolean{
+        isTextoError = texto.length <3
+        isDataError = data.length < 3
+        return !isTextoError && !isDataError
+    }
+
+    val context = LocalContext.current
+
+    //Armazena os dados localmente, salva no SharedPreferences assim que o login é sucedido
+    fun salvarRegistro(context: Context, texto: String, data: String) {
+        val dados = context.getSharedPreferences("registro_dados", Context.MODE_PRIVATE)
+        dados.edit()
+            .putString("registro_texto", texto)
+            .putString("registro_data", data)
+            .apply()
+    }
+
+    var mostrarMenssagemSucesso by remember { mutableStateOf(false) }
 
     //Criar uma estância da conexão com a API
     val registroAPI = RetrofitFactory().getRegistroService()
@@ -89,7 +120,7 @@ fun TelaRegistro(navegacao: NavHostController?) {
                 value = texto,
                 onValueChange = { texto = it },
                 label = { Text("") },
-                modifier = Modifier.width(360.dp),
+                modifier = Modifier.width(360.dp).height(540.dp),
                 singleLine = true,
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Color.Gray,
@@ -97,7 +128,18 @@ fun TelaRegistro(navegacao: NavHostController?) {
                     cursorColor = Color.Gray,
                     unfocusedLabelColor = Color.Gray,
                     focusedLabelColor = Color.Gray
-                )
+                ),
+                isError = isTextoError, //Estilo de erro vermelho
+                supportingText = {
+                    if (isTextoError){
+                        Text(text = "Texto é obrigatório!")
+                    }
+                },
+                trailingIcon = {
+                    if(isTextoError){
+                        Icon(imageVector = Icons.Default.Info, contentDescription = "Alerta")
+                    }
+                }
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -111,23 +153,56 @@ fun TelaRegistro(navegacao: NavHostController?) {
                     value = data,
                     onValueChange = { data = it },
                     label = { Text("AAAA-MM-DD", fontSize = 10.sp) },
-                    modifier = Modifier.width(100.dp),
+                    modifier = Modifier.width(125.dp).height(40.dp).padding(end = 15.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color.Gray,
                         unfocusedBorderColor = Color.Gray,
                         cursorColor = Color.Gray,
                         unfocusedLabelColor = Color.Gray,
                         focusedLabelColor = Color.Gray
-                    )
+                    ),
+                    isError = isDataError, //Estilo de erro vermelho
+                    supportingText = {
+                        if (isDataError){
+                            Text(text = "Data é obrigatório!")
+                        }
+                    },
+                    trailingIcon = {
+                        if(isDataError){
+                            Icon(imageVector = Icons.Default.Info, contentDescription = "Alerta")
+                        }
+                    }
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Button(
                     onClick = {
+                        if(validar()){
+                            val body = Registro(
+                                texto = texto,
+                                data = data
+                            )
+                            GlobalScope.launch(Dispatchers.IO) {
+                                val registro = registroAPI
+                                    .cadastrarRegistro(body)
+                                    .await()
+                                println("Sucesso uhuuuull")
+                                if (registro.status_code == 201) {
+                                    salvarRegistro(context, texto, data)
+                                    withContext(Dispatchers.Main) {
+                                        navegacao?.navigate("listaRegistro")
+                                    }
+                                }else{
+                                    println("Erro")
+                                }
+                            }
+                        }else{
+                            println("Deu ERRADOOO")
+                        }
                     },
                     modifier = Modifier
-                        .width(90.dp),
+                        .width(110.dp).padding(end = 15.dp),
                     shape = RoundedCornerShape(8.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1892FF))
                 ) {
@@ -173,7 +248,7 @@ fun TelaRegistro(navegacao: NavHostController?) {
                 }
             }
 
-            Spacer(modifier = Modifier.height(800.dp))
+            Spacer(modifier = Modifier.height(730.dp))
 
             //Barra inferior
             Card(
@@ -220,7 +295,7 @@ fun TelaRegistro(navegacao: NavHostController?) {
                         contentDescription = "",
                         modifier = Modifier
                             .size(24.dp)
-                            .clickable { navegacao!!.navigate("") }
+                            .clickable { navegacao!!.navigate("registro") }
                     )
                     Spacer(modifier = Modifier.width(80.dp))
 

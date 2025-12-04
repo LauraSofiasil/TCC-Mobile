@@ -75,7 +75,7 @@ fun TelaInicial(navegacao: NavHostController?) {
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.Transparent)
-                .padding(top = 530.dp),
+                .padding(top = 500.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
@@ -97,7 +97,7 @@ fun TelaInicial(navegacao: NavHostController?) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 800.dp)
+                .padding(top = 780.dp)
                 .background(Color.Transparent),
             horizontalAlignment = Alignment.End
         ) {

@@ -271,7 +271,7 @@ fun TelaLogin(navegacao: NavHostController?) {
                     )
                 }
 
-                Spacer(modifier = Modifier.height(50.dp))
+                Spacer(modifier = Modifier.height(35.dp))
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -298,7 +298,7 @@ fun TelaLogin(navegacao: NavHostController?) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 90.dp)
+                        .padding(top = 70.dp)
                         .background(Color.Transparent),
                     horizontalAlignment = Alignment.End
                 ) {

@@ -91,7 +91,7 @@ fun TelaInicial2(navegacao: NavHostController?) {
                 painter = painterResource(R.drawable.icon),
                 contentDescription = "",
                 modifier = Modifier
-                    .padding(top = 260.dp)
+                    .padding(top = 230.dp)
                     .size(350.dp)
             )
 
